@@ -17,6 +17,8 @@ export default new VueRouter({
         path:'/newappointment', name:'newappointment', component:()=>import('@/components/main/AppointmentComp.vue')
     },{
         path:'/login', name:'login', component:()=>import('@/components/main/LoginComponent.vue')
+    },{
+        path:'/register', name:'register', component:()=>import('@/components/main/RegisterComponent.vue')
     }
 
 

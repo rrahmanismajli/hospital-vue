@@ -9,17 +9,17 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-primary-50 mb-5">Please enter your login and password!</p>
-              <form>
+              <form @submit.prevent="handleLoginUser">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                  <label class="form-label" for="form1Example13">Email address</label>
+                  <input type="email" id="email" v-model="email" class="form-control form-control-lg" />
+                  <label class="form-label" for="email">Email address</label>
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                  <label class="form-label" for="form1Example23">Password</label>
+                  <input type="password" id="password" v-model="password" class="form-control form-control-lg" />
+                  <label class="form-label" for="password">Password</label>
                 </div>
       
                 <div class="d-flex justify-content-around align-items-center mb-4">
@@ -41,5 +41,25 @@
         </div>
       </section>
 </template>
-<script></script>
+<script>
+import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
+
+    export default{
+        data(){
+            return{
+                email:"",
+                password:""
+            }
+        },
+        methods:{
+          async handleLoginUser(){
+                const auth = getAuth();
+               const response = await signInWithEmailAndPassword(auth,this.email,this.password);
+               const user = response.user;
+              this.user  = user;
+              console.log("user= "+ user);
+            }
+        }
+    }
+</script>
 <style></style>
