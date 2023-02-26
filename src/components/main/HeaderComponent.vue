@@ -32,7 +32,8 @@ export default{
         {path:"/",name:"Home"},
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
-        {path:"/newappointment",name:"Make a Appointment"}
+        {path:"/newappointment",name:"Make a Appointment"},
+        {path:"/login",name:"Log in"}
       ],
     }
   }
