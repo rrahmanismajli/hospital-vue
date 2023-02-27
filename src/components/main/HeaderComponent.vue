@@ -2,7 +2,7 @@
  
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img width="50px" height="50px" alt="Vue logo" src="@/assets/logo.png">
-  <a class="navbar-brand" href="">Hospital
+  <a class="navbar-brand" href="">MedCare
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
