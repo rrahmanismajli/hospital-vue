@@ -19,12 +19,33 @@
       </li>
       <template v-if="user.loggedIn">
                                 
-        <div class="nav-item">
-            <a class="nav-link"> Welcome, {{user.data.displayName}} </a>
+        <div>
+          <b-dropdown id="dropdown-1" v-bind:text="user.data.displayName" class="m-md-2">
+            <b-dropdown-item>   
+              <template v-if="user.role=='admin'">
+                <li class="nav-item">
+                <router-link to="adminDash" class="nav-link" id="alinklogin">Admin Dashboard</router-link>
+                </li>     
+            </template>
+            <template v-else>
+              <li class="nav-item">
+              <router-link to="userDash" class="nav-link" id="alinklogin">User Dashboard</router-link>
+              </li>     
+          </template> </b-dropdown-item>
+            <b-dropdown-item><template v-if="user.role=='user'">
+              <li class="nav-item">
+              <router-link to="adminDash" class="nav-link" id="alinklogin">My Appointments</router-link>
+              </li>     
+          </template></b-dropdown-item>
+          
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item active><li class="nav-item" style="cursor:pointer">
+              <a class="nav-link" @click.prevent="signOut">Sign out</a>
+          </li></b-dropdown-item>
+         
+          </b-dropdown>
         </div>
-        <li class="nav-item" style="cursor:pointer">
-            <a class="nav-link" @click.prevent="signOut">Sign out</a>
-        </li>
+    
         
 
     </template>
@@ -38,6 +59,8 @@
         
 
     </template>
+    
+ 
     </ul>
     
   </div>
@@ -57,6 +80,9 @@ export default{
   },
   data(){
     return{
+      const:{
+        welcome:"Welcome"
+      },
       navs:[
         {path:"/",name:"Home"},
         {path :"/about",name:"About Us"},

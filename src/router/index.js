@@ -19,7 +19,14 @@ export default new VueRouter({
     },{
         path:'/register', name:'register', component:()=>import('@/components/main/RegisterComponent.vue')
        
+    },{
+        path:'/adminDash', name:'admin', component:()=>import('@/components/dashboards/adminComp.vue')
+       
+    },{
+        path:'/userDash', name:'userDash', component:()=>import('@/components/dashboards/userComp.vue')
+       
     }
+
 
 
     ]

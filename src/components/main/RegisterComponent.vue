@@ -53,6 +53,11 @@
                           </label>
                         </div>
        -->
+       <label for="role">Role:</label>
+       <select id="role" v-model="role">
+         <option value="admin">Admin</option>
+         <option value="user">User</option>
+       </select>
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button  class="btn btn-primary btn-lg">Register</button>
                         </div>
@@ -83,6 +88,7 @@ export default{
             name:'',
             email:"",
             password:'',
+            role:null,
             error:null
         }
     },
@@ -95,9 +101,11 @@ export default{
         .then(data => {
           data.user
             .updateProfile({
-              displayName: this.name
+              displayName: this.name,
             })
             .then(() => {});
+           
+
             firebase
         .auth()
         .signOut()
@@ -106,6 +114,7 @@ export default{
             name: "login"
           });
         });
+        this.$store.commit('SET_ROLE', this.role)
         })
         .catch(err => {
           this.error = err.message;

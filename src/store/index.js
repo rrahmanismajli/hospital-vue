@@ -6,6 +6,7 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null,
+      role:null,
     }
   },
   getters: {
@@ -19,7 +20,11 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
+    },
+    SET_ROLE(state,rol){
+      state.user.role=rol;
     }
+
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -27,8 +32,9 @@ export default new Vuex.Store({
       if (user) {
         commit("SET_USER", {
           displayName: user.displayName,
-          email: user.email
+          email: user.email,
         });
+      
       } else {
         commit("SET_USER", null);
       }

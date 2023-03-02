@@ -23,6 +23,7 @@ firebase.firestore().settings(settings);
 
 firebase.auth().onAuthStateChanged(user=>{
     store.dispatch("fetchUser", user);
+    
 });
 
 firebase.getCurrentUser  = () => {
