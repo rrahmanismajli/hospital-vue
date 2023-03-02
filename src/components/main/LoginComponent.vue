@@ -9,6 +9,7 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-primary-50 mb-5">Please enter your login and password!</p>
+              <div v-if="error" class="alert alert-danger">{{error}}</div>
               <form @submit.prevent="submit">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -49,7 +50,8 @@ import firebase from "firebase";
         data(){
             return{
                 email:"",
-                password:""
+                password:"",
+                error:null
             }
         },
         methods:{

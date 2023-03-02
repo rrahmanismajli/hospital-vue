@@ -1,207 +1,24 @@
 <template>
-   <section class="about" id="about">
-
-<h1 class="heading"> <span>about</span> us </h1>
-
-<div class="row">
-
-    <div class="image">
-        <img src="../../assets/about-img.svg" alt="">
+    <div id="slider">
+        <Slider></Slider>
     </div>
-
-    <div class="content">
-        <h3>we take care of your healthy life</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
-        <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-    </div>
-
-</div>
-
-</section>
 </template>
 
-<script ></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
-
-:root{
-    --green:#16a085;
-    --black:#444;
-    --light-color:#777;
-    --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
-    --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
-    --border:.2rem solid var(--green);
+<script>
+import Slider from '@/components/SliderComp.vue'
+export default {
+  name: 'sliderComp',
+  components: {
+    Slider
+  }
 }
+</script>
 
-*{
-    font-family: 'Poppins', sans-serif;
-    margin:0; padding: 0;
-    box-sizing: border-box;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s ease-out;
-    text-decoration: none;
-}
-
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 7rem;
-    scroll-behavior: smooth;
-}
-
-section{
-    padding:2rem 9%;
-}
-
-section:nth-child(even){
-    background: #f5f5f5;
-}
-
-.heading{
-    text-align: center;
-    padding-bottom: 2rem;
-    text-shadow: var(--text-shadow);
-    text-transform: uppercase;
-    color:var(--black);
-    font-size: 5rem;
-    letter-spacing: .4rem;
-}
-
-.heading span{
-    text-transform: uppercase;
-    color:var(--green);
-}
-
-
-.btn{
-    display: inline-block;
-    margin-top: 1rem;
-    padding: .5rem;
-    padding-left: 1rem;
-    border:var(--border);
-    border-radius: .5rem;
-    box-shadow: var(--box-shadow);
-    color:var(--green);
-    cursor: pointer;
-    font-size: 1.7rem;
-    background: #fff;
-}
-
-.btn span{
-    padding:.7rem 1rem;
-    border-radius: .5rem;
-    background: var(--green);
-    color:#fff;
-    margin-left: .5rem;
-}
-
-.btn:hover{
-    background: var(--green);
-    color:#fff;
-}
-
-.btn:hover span{
-    color: var(--green);
-    background:#fff;
-    margin-left: 1rem;
-}
-
-.about .row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap:2rem;
-}
-
-.about .row .image{
-    flex:1 1 45rem;
-}
-
-.about .row .image img{
-    width: 100%;
-}
-
-.about .row .content{
-    flex:1 1 45rem;
-}
-
-.about .row .content h3{
-    color: var(--black);
-    text-shadow: var(--text-shadow);
-    font-size: 4rem;
-    line-height: 1.8;
-}
-
-.about .row .content p{
-    color: var(--light-color);
-    padding:1rem 0;
-    font-size: 1.5rem;
-    line-height: 1.8;
-}
-
-
-/* media queries  */
-@media (max-width:991px){
-
-    html{
-        font-size: 55%;
+<style scoped>
+    #slider{
+        padding-left:5%;
+        padding-right:5%;
+        padding-top:1%;
+        padding-bottom:1%;
     }
-
-    .header{
-        padding: 2rem;
-    }
-
-    section{
-        padding:2rem;
-    }
-
-}
-
-@media (max-width:768px){
-
-    #menu-btn{
-        display: initial;
-    }
-
-    .header .navbar{
-        position: absolute;
-        top:115%; right: 2rem;
-        border-radius: .5rem;
-        box-shadow: var(--box-shadow);
-        width: 30rem;
-        border: var(--border);
-        background: #fff;
-        transform: scale(0);
-        opacity: 0;
-        transform-origin: top right;
-        transition: none;
-    }
-
-    .header .navbar.active{
-        transform: scale(1);
-        opacity: 1;
-        transition: .2s ease-out;
-    }
-
-    .header .navbar a{
-        font-size: 2rem;
-        display: block;
-        margin:2.5rem;
-    }
-
-}
-
-@media (max-width:450px){
-
-    html{
-        font-size: 50%;
-    }
-
-}
-
-
-
-
 </style>
