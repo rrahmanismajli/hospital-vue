@@ -11,8 +11,8 @@
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
       
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-      
-                      <form class="mx-1 mx-md-4" @submit.prevent="handleRegisterUser">
+                      <div v-if="error" class="alert alert-danger">{{error}}</div>
+                      <form class="mx-1 mx-md-4" @submit.prevent="submit">
       
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -53,6 +53,11 @@
                           </label>
                         </div>
        -->
+       <label for="role">Role:</label>
+       <select id="role" v-model="role">
+         <option value="admin">Admin</option>
+         <option value="user">User</option>
+       </select>
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button  class="btn btn-primary btn-lg">Register</button>
                         </div>
@@ -75,8 +80,7 @@
       </section>
 </template>
 <script>
-
-import {getAuth,createUserWithEmailAndPassword,updateProfile,signOut} from 'firebase/auth';
+import firebase from 'firebase';
 export default{
 
     data(){
@@ -84,20 +88,39 @@ export default{
             name:'',
             email:"",
             password:'',
+            role:null,
             error:null
         }
     },
 
     methods:{
-       async handleRegisterUser(){
-        console.log("register");
-            const auth =getAuth();
-          const result = await  createUserWithEmailAndPassword(auth,this.email,this.password);
-          const user = result.user;
-         await  updateProfile(user,{displayName:this.name});
-          await signOut(auth);
-          this.$router.push('/login');
-        }
+      submit() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(data => {
+          data.user
+            .updateProfile({
+              displayName: this.name,
+            })
+            .then(() => {});
+           
+
+            firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "login"
+          });
+        });
+        this.$store.commit('SET_ROLE', this.role)
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
+    },
+   
     }
 }
 </script>

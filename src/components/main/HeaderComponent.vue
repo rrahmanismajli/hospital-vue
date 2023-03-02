@@ -17,7 +17,50 @@
         <a>{{route.name}}</a>
        </router-link>
       </li>
-     
+      <template v-if="user.loggedIn">
+                                
+        <div>
+          <b-dropdown id="dropdown-1" v-bind:text="user.data.displayName" class="m-md-2">
+            <b-dropdown-item>   
+              <template v-if="user.role=='admin'">
+                <li class="nav-item">
+                <router-link to="adminDash" class="nav-link" id="alinklogin">Admin Dashboard</router-link>
+                </li>     
+            </template>
+            <template v-else>
+              <li class="nav-item">
+              <router-link to="userDash" class="nav-link" id="alinklogin">User Dashboard</router-link>
+              </li>     
+          </template> </b-dropdown-item>
+            <b-dropdown-item><template v-if="user.role=='user'">
+              <li class="nav-item">
+              <router-link to="adminDash" class="nav-link" id="alinklogin">My Appointments</router-link>
+              </li>     
+          </template></b-dropdown-item>
+          
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item active><li class="nav-item" style="cursor:pointer">
+              <a class="nav-link" @click.prevent="signOut">Sign out</a>
+          </li></b-dropdown-item>
+         
+          </b-dropdown>
+        </div>
+    
+        
+
+    </template>
+    <template v-else>
+        <li class="nav-item">
+        <router-link to="login" class="nav-link" id="alinklogin">Login</router-link>
+        </li>
+        <li class="nav-item">
+        <router-link to="register" class="nav-link" id="alinkreg">Register</router-link>
+        </li>
+        
+
+    </template>
+    
+ 
     </ul>
     
   </div>
@@ -25,19 +68,42 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex";
+import firebase from "firebase";
 export default{
+  computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data(){
     return{
+      const:{
+        welcome:"Welcome"
+      },
       navs:[
         {path:"/",name:"Home"},
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
         {path:"/newappointment",name:"Make a Appointment"},
-        {path:"/login",name:"Log in"},
-        {path:"/register",name:"Register"}
+   
       ],
     }
+  },  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "home"
+          });
+        });
+    },
   }
+
 }
 
 </script>

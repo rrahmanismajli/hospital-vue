@@ -1,6 +1,6 @@
 import firebaseApp from './index';
-import {getFirestore} from 'firebase/firestore';
+import  'firebase/firestore';
 
-const db = getFirestore(firebaseApp);
+const db = firebaseApp.firestore()
 
 export default db;
