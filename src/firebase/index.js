@@ -1,6 +1,9 @@
 //import { set } from 'core-js/core/dict';
 //mport { reject, resolve } from 'core-js/fn/promise';
-import {initializeApp} from 'firebase/app'
+
+import firebase from 'firebase';
+import store from '@/store/index';
+const settings = {timestampsInSnapshots: true};
 //import store from '../store'
 /*const settings = {
     timestampsInSnapshots:true
@@ -14,7 +17,25 @@ const fbconfig= {
   appId: "1:1022104933979:web:addecba0f371fe46dd917e"
 }
 
-const app = initializeApp(fbconfig);
+firebase.initializeApp(fbconfig);
+
+firebase.firestore().settings(settings);
+
+firebase.auth().onAuthStateChanged(user=>{
+    store.dispatch("fetchUser", user);
+});
+
+firebase.getCurrentUser  = () => {
+    return new Promise((resolve,reject)=>{
+        const unsubscribe = firebase.auth().onAuthStateChanged(user=>{
+            unsubscribe();
+            resolve(user);
+        }, reject);
+    });
+}
+
+export default firebase;
+
 /*
 firebase.firestore().settings(settings);
 firebase.auth().onAuthStateChanged(user =>{
@@ -29,4 +50,3 @@ firebase.getCurrentUser = ()=>{
         },reject);
     })
 };*/
-export default app;

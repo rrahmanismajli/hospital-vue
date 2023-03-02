@@ -9,7 +9,7 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-primary-50 mb-5">Please enter your login and password!</p>
-              <form @submit.prevent="handleLoginUser">
+              <form @submit.prevent="submit">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <input type="email" id="email" v-model="email" class="form-control form-control-lg" />
@@ -42,7 +42,8 @@
       </section>
 </template>
 <script>
-import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
+/* eslint-disable*/
+import firebase from "firebase";
 
     export default{
         data(){
@@ -52,13 +53,18 @@ import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
             }
         },
         methods:{
-          async handleLoginUser(){
-                const auth = getAuth();
-               const response = await signInWithEmailAndPassword(auth,this.email,this.password);
-               const user = response.user;
-              this.user  = user;
-              console.log("user= "+ user);
-            }
+          submit() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(data => {
+          this.$router.push({name: 'home',})
+          window.localStorage.setItem('email', this.form.email);
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
+    }
         }
     }
 </script>

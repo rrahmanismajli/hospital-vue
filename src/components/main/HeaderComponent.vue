@@ -17,7 +17,27 @@
         <a>{{route.name}}</a>
        </router-link>
       </li>
-     
+      <template v-if="user.loggedIn">
+                                
+        <div class="nav-item">
+            <a class="nav-link"> Welcome, {{user.data.displayName}} </a>
+        </div>
+        <li class="nav-item" style="cursor:pointer">
+            <a class="nav-link" @click.prevent="signOut">Sign out</a>
+        </li>
+        
+
+    </template>
+    <template v-else>
+        <li class="nav-item">
+        <router-link to="login" class="nav-link" id="alinklogin">Login</router-link>
+        </li>
+        <li class="nav-item">
+        <router-link to="register" class="nav-link" id="alinkreg">Register</router-link>
+        </li>
+        
+
+    </template>
     </ul>
     
   </div>
@@ -25,7 +45,16 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex";
+import firebase from "firebase";
 export default{
+  computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data(){
     return{
       navs:[
@@ -33,11 +62,22 @@ export default{
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
         {path:"/newappointment",name:"Make a Appointment"},
-        {path:"/login",name:"Log in"},
-        {path:"/register",name:"Register"}
+   
       ],
     }
+  },  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "home"
+          });
+        });
+    },
   }
+
 }
 
 </script>
