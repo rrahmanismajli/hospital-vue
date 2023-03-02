@@ -11,12 +11,17 @@
 
             <form v-on:submit.prevent="handleSubmitAppointment">
                 <h3>book appointment</h3>
-                    <input type="text" placeholder="Full Name..." class="box" v-bind:value="newAppointment.name"
+                <input v-if="user.loggedIn" type="text" placeholder="Full Name..." class="box" v-bind:value="user.data.displayName"
+                v-on:input="newAppointment.name = $event.target.value">
+                    <input v-else type="text" placeholder="Full Name..." class="box" v-bind:value="newAppointment.name"
                         v-on:input="newAppointment.name = $event.target.value">
                     <input type="number" placeholder="Phone Number..." class="box" v-bind:value="newAppointment.number"
                         v-on:input="newAppointment.number = $event.target.value">
-                    <input type="email" placeholder="Email..." class="box" v-bind:value="newAppointment.email"
+                        <input v-if="user.loggedIn" ype="email" placeholder="Email..." class="box"  v-bind:value="user.data.email"
                         v-on:input="newAppointment.email = $event.target.value">
+                    <input v-else type="email" placeholder="Email..." class="box"  v-bind:value="newAppointment.email"
+                        v-on:input="newAppointment.email = $event.target.value">
+                        
                     <input type="date" placeholder="Date..." class="box" v-bind:value="newAppointment.date"
                         v-on:input="newAppointment.date = $event.target.value">
                     <input type="submit" value="book now" class="btn">
@@ -27,9 +32,17 @@
     </section>
 </template>
 <script>
-import { addDoc, collection } from 'firebase/firestore';
+
 import db from '../../firebase/db'
+import { mapGetters } from "vuex";
+
 export default {
+    computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
     data() {
         return {
             newAppointment: {
@@ -48,10 +61,10 @@ export default {
                 !this.newAppointment.name.trim() ||
                 !this.newAppointment.number.trim()
             ) return;
-            // create a new post
+            // create a new appointment
             console.log('make request to create new appointment -> ', this.newAppointment);
             try {
-                const result = await addDoc(collection(db, "appointment"), { ...this.newAppointment })
+                const result = await db.collection('appointments').add({ ...this.newAppointment })
                 console.log(result);
             } catch (err) {
                 console.error(err);

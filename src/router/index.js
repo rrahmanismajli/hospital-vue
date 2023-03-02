@@ -1,8 +1,7 @@
 import Home from '@/components/main/HomeComponent.vue'
 import VueRouter from 'vue-router'          
-//import router from './index'
-
-//import firebase from '@/Firebase'
+import router from './index'
+import firebase from '../firebase'
 
 
 export default new VueRouter({
@@ -19,8 +18,18 @@ export default new VueRouter({
         path:'/login', name:'login', component:()=>import('@/components/main/LoginComponent.vue')
     },{
         path:'/register', name:'register', component:()=>import('@/components/main/RegisterComponent.vue')
+       
     }
 
 
     ]
-})
+});
+
+router.beforeEach(async (to, from, next)=>{
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    if(requiresAuth && !await firebase.getCurrentUser()){
+        next('Login');
+    }else{
+        next();
+    }
+});
