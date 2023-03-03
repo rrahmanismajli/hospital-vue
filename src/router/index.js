@@ -25,6 +25,9 @@ export default new VueRouter({
     },{
         path:'/userDash', name:'userDash', component:()=>import('@/components/dashboards/userComp.vue')
        
+    },
+    {
+        path:'/pharmacy', name:'pharamcy',component:()=>import ('@/components/main/Pharmacy.vue')
     }
 
 
