@@ -25,6 +25,9 @@
               <template v-if="user.role=='admin'">
                 <li class="nav-item">
                 <router-link to="adminDash" class="nav-link" id="alinklogin">Admin Dashboard</router-link>
+                </li> 
+                <li class="nav-item">
+                <router-link to="createDepartment" class="nav-link" id="alinklogin">Create Dep</router-link>
                 </li>     
             </template>
             <template v-else>
@@ -85,6 +88,7 @@ export default{
       },
       navs:[
         {path:"/",name:"Home"},
+        {path:"/doctor",name:"Doctor"},
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
         {path:"/newappointment",name:"Make a Appointment"},
