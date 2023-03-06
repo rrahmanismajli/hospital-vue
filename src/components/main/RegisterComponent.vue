@@ -81,6 +81,7 @@
 </template>
 <script>
 import firebase from 'firebase';
+import db from '../../firebase/db'
 export default{
 
     data(){
@@ -102,10 +103,16 @@ export default{
           data.user
             .updateProfile({
               displayName: this.name,
+            }).then(()=>{
+              db.collection('users').add({ 
+                useri:data.user.uid,
+                userEmail:this.email,
+                role:this.role })
+              
             })
             .then(() => {});
            
-
+              
             firebase
         .auth()
         .signOut()
@@ -114,7 +121,7 @@ export default{
             name: "login"
           });
         });
-        this.$store.commit('SET_ROLE', this.role)
+      //  this.$store.commit('SET_ROLE', this.role)
         })
         .catch(err => {
           this.error = err.message;

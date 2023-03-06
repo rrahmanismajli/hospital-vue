@@ -46,8 +46,14 @@
 /* eslint-disable*/
 import firebase from "firebase";
 
+import { mapGetters } from "vuex";
     export default{
-        data(){
+      computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },data(){
             return{
                 email:"",
                 password:"",
@@ -66,7 +72,10 @@ import firebase from "firebase";
         .catch(err => {
           this.error = err.message;
         });
+        const userId = firebase.auth().currentUser.uid;
+        console.log(userId);
     }
+
         }
     }
 </script>

@@ -1,5 +1,9 @@
-/*import Vue from "vue";
+//import db from "@/firebase/db";
+
+import Vue from "vue";
 import Vuex from "vuex";
+
+
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
@@ -12,16 +16,19 @@ export default new Vuex.Store({
   getters: {
     user(state){
       return state.user
+    
     }
   },
   mutations: {
+    
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
     },
-    SET_USER(state, data) {
+    SET_USER(state, data,role) {
       state.user.data = data;
+      state.user.role=role;
     },
-    SET_ROLE(state,rol){
+    SET_ROLE(state,rol){     
       state.user.role=rol;
     }
 
@@ -33,6 +40,9 @@ export default new Vuex.Store({
         commit("SET_USER", {
           displayName: user.displayName,
           email: user.email,
+         
+        },{
+          role:user.role,
         });
       
       } else {
@@ -41,4 +51,3 @@ export default new Vuex.Store({
     }
   }
 });
-*/

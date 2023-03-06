@@ -16,9 +16,16 @@ const fbconfig= {
   messagingSenderId: "1022104933979",
   appId: "1:1022104933979:web:addecba0f371fe46dd917e"
 }
-
 firebase.initializeApp(fbconfig);
+/*const auth = firebase.auth();
+auth.useEmulator("http://localhost:9099 ");
+firebase.functions().useEmulator("localhost",5001)
 
+var db = firebase.firestore();
+if (location.hostname === "localhost") {
+  db.useEmulator("localhost", 8080);
+}
+*/
 firebase.firestore().settings(settings);
 
 firebase.auth().onAuthStateChanged(user=>{

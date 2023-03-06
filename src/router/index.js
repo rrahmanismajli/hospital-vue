@@ -13,21 +13,27 @@ export default new VueRouter({
     },{
         path:'/contactus', name:'contactus', component:()=>import('@/components/main/ContactComponent.vue')
     },{
-        path:'/newappointment', name:'newappointment', component:()=>import('@/components/main/AppointmentComp.vue')
+        path:'/newappointment', name:'newappointment', component:()=>import('@/components/main/AppointmentComp.vue'), meta:{
+            requiresAuth: true
+        }
     },{
         path:'/login', name:'login', component:()=>import('@/components/main/LoginComponent.vue')
     },{
         path:'/register', name:'register', component:()=>import('@/components/main/RegisterComponent.vue')
        
     },{
-        path:'/adminDash', name:'admin', component:()=>import('@/components/dashboards/adminComp.vue')
+        path:'/adminDash', name:'admin', component:()=>import('@/components/dashboards/adminComp.vue'), meta:{
+            requiresAuth: true
+        }
        
     },{
-        path:'/userDash', name:'userDash', component:()=>import('@/components/dashboards/userComp.vue')
+        path:'/userDash', name:'userDash', component:()=>import('@/components/dashboards/userComp.vue'), meta:{
+            requiresAuth: true
+        }
        
     },
     {
-        path:'/pharmacy', name:'pharamcy',component:()=>import ('@/components/main/Pharmacy.vue')
+        path:'/pharmacy', name:'pharamcy',component:()=>import ('@/components/main/PharmacyComp.vue')
     }
 
 

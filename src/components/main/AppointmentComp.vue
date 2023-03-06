@@ -35,7 +35,7 @@
 
 import db from '../../firebase/db'
 import { mapGetters } from "vuex";
-
+import firebase from 'firebase';
 export default {
     computed: {
     ...mapGetters({
@@ -55,7 +55,11 @@ export default {
     },
     methods: {
         async handleSubmitAppointment() {
+
             console.log('Attempting to create new Appointment')
+            const userId = firebase.auth().currentUser.uid.valueOf();
+            console.log(userId);
+   
             //validation
             if (
                 !this.newAppointment.name.trim() ||
