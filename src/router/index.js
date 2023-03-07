@@ -7,8 +7,6 @@ import firebase from '../firebase'
 export default new VueRouter({
     routes: [{
         path: '/', name: 'home', component: Home
-    }, {
-        path: '/doctor', name: 'doctor', component: () => import('../components/main/DoctorComponent.vue')
     },
     {
         path:'/about', name:'about',component:()=>import ('../components/main/AboutComponent.vue')
@@ -47,15 +45,18 @@ export default new VueRouter({
     }, {
         path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/main/PharmacyComp.vue')
 
+    }, {
+        path: '/doctor', name: 'doctor', component: () => import('@/components/doctors/Doctor.vue')
+
     },
 
-    {
+   /* {
         path: '/DepartmentList', name: 'DepartmentList', component: () => import('@/views/DepartmentList.vue')
-    },
-    {
+    },*/
+   /* {
         path: '/CreateDepartment', name: 'createDepartment', component: () => import('@/views/CreateDepartment.vue')
 
-    }
+    }*/
 
 
     ]

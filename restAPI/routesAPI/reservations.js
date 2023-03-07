@@ -1,4 +1,4 @@
-var Products = require('../models/Reservation');
+var Products = require('../../restAPI/models/Reservation');
 var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
