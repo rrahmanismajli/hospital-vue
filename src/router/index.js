@@ -44,12 +44,19 @@ export default new VueRouter({
 
     }, {
         path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/main/PharmacyComp.vue')
+    }/* {
+        path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/pharmacy/Pharmacy.vue')
 
     }, {
         path: '/doctor', name: 'doctor', component: () => import('@/components/doctors/Doctor.vue')
 
     },{
         path: '/department', name: 'department', component: () => import('@/components/AdminCruds/DepartmentsComp/department.vue'), meta:{
+            requiresAuth: true
+        }
+
+    },{
+        path: '/departments', name: 'department', component: () => import('@/components/main/DepartmentComponent.vue'), meta:{
             requiresAuth: true
         }
 

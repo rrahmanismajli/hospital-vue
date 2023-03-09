@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './firebase';
 import store from "./store";
 
+
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
@@ -19,3 +20,5 @@ new Vue({
   store,
   router
 }).$mount('#app')
+
+
