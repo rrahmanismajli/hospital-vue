@@ -44,6 +44,8 @@ export default new VueRouter({
 
     }, {
         path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/main/PharmacyComp.vue')
+    }/* {
+        path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/pharmacy/Pharmacy.vue')
 
     }, {
         path: '/doctor', name: 'doctor', component: () => import('@/components/doctors/Doctor.vue')
