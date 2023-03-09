@@ -2,19 +2,16 @@
     <section class="doctors" id="doctors">
         <div>
                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <h1 class="heading"> our <span>doctors</span> </h1>
+        <h1 class="heading"> <span>departments</span> </h1>
         </div>
    <div class="box-container">
-    <b-col v-for="doctor in doctorfields" v-bind:key="doctor._id">
+    <b-col v-for="departments in departmentsfields" v-bind:key="departments._id">
         <div class="box">
-            <h3>{{ doctor.name }}</h3>
-            <span>{{ doctor.specialization}}</span>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
-            </div>
+            <!---<img :src="`http://localhost:5000/images/${product.image}`" class="imagediv">-->
+            <h3>{{ departments.name }}</h3>
+            <span>{{ departments.description}}</span>
+            <p>{{ departments. phoneNumber }}</p>
+            <p>{{ departments.email }}</p>
         </div>
     </b-col>
     </div>
@@ -197,16 +194,16 @@ section:nth-child(even) {
 /* eslint-disable */
 import axios from 'axios'
 export default {
-  name: 'Doctors',
+  name: 'Departments',
   data () {
     return {
-        doctorfields:{},
-      doctors: {}
+        departmentsfields:{},
+      epartments: {}
     }
   },created () {
-    axios.get(`http://localhost:3001/doctors`)
+    axios.get(`http://localhost:3001/departments`)
     .then(response => {
-      this.doctorfields = response.data
+      this.departmentsfields = response.data
     })
     .catch(e => {
       this.errors.push(e)
@@ -215,7 +212,7 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      axios.post(`http://localhost:3001/doctors`, this.doctors)
+      axios.post(`http://localhost:3001/departments`, this.departments)
       .then(function (response) {
         console.log(response);
         })

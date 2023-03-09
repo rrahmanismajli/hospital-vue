@@ -50,7 +50,22 @@ export default new VueRouter({
     }, {
         path: '/doctor', name: 'doctor', component: () => import('@/components/doctors/Doctor.vue')
 
-    },
+    },{
+        path: '/department', name: 'department', component: () => import('@/components/AdminCruds/DepartmentsComp/department.vue'), meta:{
+            requiresAuth: true
+        }
+
+    },{
+        path: '/department/create', name: 'departmentcreate', component: () => import('@/components/AdminCruds/DepartmentsComp/createDepartment'), meta:{
+            requiresAuth: true
+        }
+
+    },{
+        path: '/departments/:id/edit',
+        name: 'edit-department',
+        component: () => import('@/components/AdminCruds/DepartmentsComp/editDepartment.vue'),
+        props: true
+      }
 
    /* {
         path: '/DepartmentList', name: 'DepartmentList', component: () => import('@/views/DepartmentList.vue')

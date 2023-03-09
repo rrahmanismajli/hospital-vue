@@ -92,7 +92,8 @@ export default{
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
         {path:"/newappointment",name:"Make a Appointment"},
-        {path:"/pharmacy",name:"Pharmacy"}
+        {path:"/pharmacy",name:"Pharmacy"},
+        {path:"/department",name:"Departments"},
    
       ],
     }
