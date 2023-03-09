@@ -54,6 +54,11 @@ export default new VueRouter({
         }
 
     },{
+        path: '/departments', name: 'department', component: () => import('@/components/main/DepartmentComponent.vue'), meta:{
+            requiresAuth: true
+        }
+
+    },{
         path: '/department/create', name: 'departmentcreate', component: () => import('@/components/AdminCruds/DepartmentsComp/createDepartment'), meta:{
             requiresAuth: true
         }

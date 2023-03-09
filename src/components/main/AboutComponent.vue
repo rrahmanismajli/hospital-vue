@@ -1,15 +1,19 @@
 <template>
     <div id="slider">
         <Slider></Slider>
+        <Doctor></Doctor>
+        
     </div>
 </template>
 
 <script>
-import Slider from '@/components/SliderComp.vue'
+import Slider from '@/components/SliderComp.vue';
+import Doctor from '@/components/main/DoctorComponent.vue'
 export default {
   name: 'sliderComp',
   components: {
-    Slider
+    Slider,
+    Doctor
   }
 }
 </script>

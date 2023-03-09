@@ -1,23 +1,43 @@
 <template>
-  <div id="app">
-    <div class="container">
-    <Header>
+  
+    <div v-if="isDashboardPage" id="app">
+ 
+    <Dashboard></Dashboard>
+
+    </div>
+
+
+
+  <div v-else  id="app">
+   
+    <Header >
     </Header>
     <router-view></router-view>
     <Footer></Footer>
-    </div>
+
   </div>
+
 </template>
 
 <script>
 import Header from './components/main/HeaderComponent.vue'
 import Footer from './components/main/FooterComponent.vue'
+import Dashboard from './components/dashboards/adminComp.vue'
 
 export default {
   name: 'App',
   components: {
-    Header,Footer
-}
+    Header,
+    Footer,
+    Dashboard
+}, computed: {
+    isDashboardPage () {
+      
+      // Check if the current route is the dashboard page
+      return this.$route.name === 'admin';
+      
+    }
+  }
 }
 </script>
 
