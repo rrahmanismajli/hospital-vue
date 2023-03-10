@@ -11,23 +11,15 @@
 	<header>
 
 		<div class="logosec">
-			<div class="logo">MedCare</div>
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
-				class="icn menuicn"
-				id="menuicn"
-				alt="menu-icon">
+			<div class="logo"><router-link :to="{name:'admin'}" class="nav-link text-success" id="alinklogin">MedCare</router-link></div>
+			
 		</div>
 
 
 	
 
 		<div class="message">
-			<div class="circle"></div>
-			<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
-				class="icn"
-				alt="">
+			<p>{{user.data.displayName}}</p>
 			<div class="dp">
 			<img src=
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
@@ -42,24 +34,26 @@
 		<div class="navcontainer">
 			<nav class="nav">
 				<div class="nav-upper-options">
-					<div class="nav-option option1">
-          <span class="material-icons-outlined">dashboard</span> Dashboard
+					<div class="nav-option option1 text-danger">
+          <span class="material-icons-outlined text-info">dashboard</span> Dashboard
 						</div>
 
 					<div class="option2 nav-option">
-                        <span class="material-icons-outlined">inventory_2</span> Departments
+                        <span class="material-icons-outlined">inventory_2</span>  
+							<router-link :to="{name:'departmentoperation'}" class="nav-link text-dark" id="alinklogin">Departments</router-link>
+							
 					</div>
 
 					<div class="nav-option option3">
-                        <span class="material-symbols-outlined">stethoscope</span> Doctors
+                        <span class="material-symbols-outlined">stethoscope</span> <router-link :to="{name:'doctorCrud'}" class="nav-link text-dark" id="alinklogin">Doctors</router-link>
 					</div>
 
 					<div class="nav-option option4">
-                        <span class="material-symbols-outlined">clinical_notes</span> Appointments
+                        <span class="material-symbols-outlined">clinical_notes</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Appointments</router-link>
 					</div>
 
 					<div class="nav-option option5">
-                        <span class="material-icons-outlined">poll</span> Reports
+                        <span class="material-icons-outlined">poll</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Reports</router-link>
 					</div>
 
 					<div class="nav-option logout">
@@ -89,37 +83,49 @@
 		
 			
 
-			<div class="report-container">
-				<div class="report-header">
-					<h1 class="recent-Articles">Recent Articles</h1>
-					<button class="view">Add One</button>
-				</div>
-
-                <table style="width:100%">
-                    <tr>
-                      <td>Emil</td>
-                      <td>Tobias</td>
-                      <td>Linus</td>
-                      <td>Edit</td>
-                      <td>Delete</td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td>14</td>
-                      <td>10</td>
-                      <td></td>
-                      <td>10</td>
-                    </tr>
-                  </table>
-
-				
+			<div v-if="!islandAdminPage" class="report-container">
+			<router-view ></router-view>
 
 					</div>
+					<div v-else class="report-container">
+					<h1>Welcome to Dashboard {{user.data.displayName}}</h1>
+			
+								</div>
 				</div>
 			</div>
 
 </section>
 </template>
+<script>
+import { mapGetters } from "vuex";
+import firebase from "firebase";
+export default {
+  computed: {
+	...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    }),
+    islandAdminPage () {
+      
+      // Check if the current route is the dashboard page
+      return this.$route.name ==='admin';
+      
+    }
+  },
+  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "home"
+          });
+        });
+    },
+  }
+}
+</script>
 <style scoped>
     /* Main CSS Here */
 

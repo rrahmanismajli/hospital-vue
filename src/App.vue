@@ -34,7 +34,7 @@ export default {
     isDashboardPage () {
       
       // Check if the current route is the dashboard page
-      return this.$route.name === 'admin';
+      return this.$route.path.includes('admin');
       
     }
   }

@@ -106,13 +106,14 @@ export default{
             }).then(()=>{
               db.collection('users').add({ 
                 useri:data.user.uid,
+                
                 userEmail:this.email,
                 role:this.role })
               
             })
             .then(() => {});
            
-              
+            
             firebase
         .auth()
         .signOut()

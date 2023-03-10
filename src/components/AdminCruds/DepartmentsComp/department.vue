@@ -2,7 +2,7 @@
     <div>
       <h1>Departments</h1>
   
-      <router-link to="/department/create" class="btn btn-primary">New Department</router-link>
+      <router-link to="/adminDash/department/create" class="btn btn-primary">New Department</router-link>
   
       <table class="table">
         <thead>

@@ -12,6 +12,12 @@
             <span>{{ departments.description}}</span>
             <p>{{ departments. phoneNumber }}</p>
             <p>{{ departments.email }}</p>
+            <div class="share">
+                <a v-bind:href="departments.socialMedias[0]" class="fab fa-facebook-f"></a>
+                <a v-bind:href="departments.socialMedias[1]" class="fab fa-instagram"></a>
+                <a v-bind:href="departments.socialMedias[2]"  class="fab fa-twitter"></a>
+                <a v-bind:href="departments.socialMedias[3]" class="fab fa-linkedin"></a>
+            </div>
         </div>
     </b-col>
     </div>

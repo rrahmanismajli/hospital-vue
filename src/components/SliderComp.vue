@@ -30,35 +30,7 @@
         </transition-group>
         <a class="prev" @click="prev" href='#'>&#10094;</a>
         <a class="next" @click="next" href='#'>&#10095;</a>
-      <div class="row mt-5 p-3" style="background-color: #3b5a7c; color: #fff; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-        <br><br>
-        <h2>Your everyday needs. Our unique capabilities.</h2>
-        <br>
-        <div class="col-md-4 text-center">
-          <img src="http://localhost:8080/services.png" style="width: 50%; margin-bottom: 5%;" alt="">
-          <br>
-          <h4><b>CUSTOMER-FIRST SERVICE</b></h4>
-          <p>Friendly, experienced support</p>
-          <p>U.S.-based, in-house help</p>
-          <p>Exceptional responsiveness</p>
-        </div>
-        <div class="col-md-4">
-          <img src="http://localhost:8080/pricing.png" style="width: 50%; margin-bottom: 5%;" alt="">
-          <br>
-          <h4><b>EASY ORDERING, YOUR WAY</b></h4>
-          <p>Contract pricing—affiliated with major IDNs and GPOs</p>
-          <p>Volume discounts</p>
-          <p>Order by web, phone, email, fax, or EDI</p>
-        </div>
-        <div class="col-md-4">
-          <img src="http://localhost:8080/truck.png" style="width: 50%; margin-bottom: 5%;" alt="">
-          <br>
-          <h4><b>IN STOCK & READY TO SHIP</b></h4>
-          <p>Thousands of items ready to ship</p>
-          <p>Same-day shipping on in-stock items ordered by 3 p.m. EST</p>
-          <p>No minimum requirements—ever!</p>
-        </div>
-      </div>
+     
     </div>
     
 </template>
