@@ -61,6 +61,11 @@ export default new VueRouter({
         }
 
     },{
+        path: '/doctors', name: 'doctor', component: () => import('@/components/main/DoctorComponent.vue'), meta:{
+           
+        }
+
+    },{
         path: '/adminDash/department/create', name: 'departmentcreate', component: () => import('@/components/AdminCruds/DepartmentsComp/createDepartment'), meta:{
             requiresAuth: true
         }
@@ -80,7 +85,17 @@ export default new VueRouter({
         name: 'edit-doctor',
         component: () => import('@/components/doctors/EditDoctor.vue'),
         props: true
-      }
+      },{
+        path: 'adminDash/services/',
+        name: 'all-services',
+        component: () => import('@/components/AdminCruds/ServicesController/service.vue'),
+        props: true
+      },{
+        path: '/adminDash/services/create', name: 'servicecreate', component: () => import('@/components/AdminCruds/ServicesController/createServices.vue'), meta:{
+            requiresAuth: true
+        }
+
+    },
 
 
    /* {
