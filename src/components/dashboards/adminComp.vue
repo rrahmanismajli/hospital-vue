@@ -57,7 +57,7 @@
 					</div>
 
 					<div class="nav-option option5">
-                        <span class="material-icons-outlined">poll</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Reports</router-link>
+                        <span class="material-icons-outlined">poll</span> <router-link :to="{name:'all-contacts'}" class="nav-link text-dark" id="alinklogin">Contact Us</router-link>
 					</div>
 
 					<div class="nav-option logout" @click.prevent="signOut">
