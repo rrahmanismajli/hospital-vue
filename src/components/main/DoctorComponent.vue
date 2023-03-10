@@ -20,6 +20,7 @@
     </b-col>
     
     </div>
+    <!--------
     <div class="row mt-5 p-3" style="background-color: #3b5a7c; color: #fff; border-radius: 8px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
         <br><br>
         <h2>Your everyday needs. Our unique capabilities.</h2>
@@ -48,7 +49,7 @@
           <p>Same-day shipping on in-stock items ordered by 3 p.m. EST</p>
           <p>No minimum requirements—ever!</p>
         </div>
-      </div>
+      </div>--->
 </section>
 </template>
 <script></script>
