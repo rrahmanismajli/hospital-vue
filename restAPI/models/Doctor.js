@@ -12,7 +12,11 @@ const doctorSchema = new mongoose.Schema({
   experience: {
     type: Number,
     required: true
-  }
+  },photo:String,
+  socialMedias:{
+    type:Array,
+    required:false
+  },
 });
 
 module.exports = mongoose.model('doctors', doctorSchema);

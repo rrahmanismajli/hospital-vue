@@ -24,6 +24,7 @@ import Header from './components/main/HeaderComponent.vue'
 import Footer from './components/main/FooterComponent.vue'
 import Dashboard from './components/dashboards/adminComp.vue'
 
+
 export default {
   name: 'App',
   components: {

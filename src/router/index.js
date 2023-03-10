@@ -48,7 +48,7 @@ export default new VueRouter({
         path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/pharmacy/Pharmacy.vue')
 
     }*/, {
-        path: '/adminDash/doctor', name: 'doctorCrud', component: () => import('@/components/doctors/Doctor.vue')
+        path: '/adminDash/doctor', name: 'doctorCrud', component: () => import('@/components/doctors/DoctorComp.vue')
 
     },{
         path: '/adminDash/department', name: 'departmentoperation', component: () => import('@/components/AdminCruds/DepartmentsComp/department.vue'), meta:{
@@ -66,11 +66,22 @@ export default new VueRouter({
         }
 
     },{
+        path: 'adminDash/doctors/',
+        name: 'all-doctors',
+        component: () => import('@/components/doctors/DoctorList.vue'),
+        props: true
+      },{
         path: '/departments/:id/edit',
         name: 'edit-department',
         component: () => import('@/components/AdminCruds/DepartmentsComp/editDepartment.vue'),
         props: true
+      },{
+        path: 'adminDash/doctors/:id/edit',
+        name: 'edit-doctor',
+        component: () => import('@/components/doctors/EditDoctor.vue'),
+        props: true
       }
+
 
    /* {
         path: '/DepartmentList', name: 'DepartmentList', component: () => import('@/views/DepartmentList.vue')

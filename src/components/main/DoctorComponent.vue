@@ -7,6 +7,7 @@
    <div class="box-container">
     <b-col v-for="doctor in doctorfields" v-bind:key="doctor._id">
         <div class="box">
+            <img v-bind:src="`http://localhost:8080/doctorimages/${doctor.photo}`" v-bind:alt="doctor.name">
             <h3>{{ doctor.name }}</h3>
             <span>{{ doctor.specialization}}</span>
             <div class="share">

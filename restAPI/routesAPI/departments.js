@@ -73,7 +73,7 @@ router.patch('/:id', getDepartment, async (req, res) => {
 // Delete a department by ID
 router.delete('/:id', getDepartment, async (req, res) => {
   try {
-    await res.department.remove();
+    await res.department.deletOne();
     res.json({ message: 'Department deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });

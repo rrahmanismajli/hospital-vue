@@ -45,7 +45,7 @@
 					</div>
 
 					<div class="nav-option option3">
-                        <span class="material-symbols-outlined">stethoscope</span> <router-link :to="{name:'doctorCrud'}" class="nav-link text-dark" id="alinklogin">Doctors</router-link>
+                        <span class="material-symbols-outlined">stethoscope</span> <router-link :to="{name:'all-doctors'}" class="nav-link text-dark" id="alinklogin">Doctors</router-link>
 					</div>
 
 					<div class="nav-option option4">
@@ -56,7 +56,7 @@
                         <span class="material-icons-outlined">poll</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Reports</router-link>
 					</div>
 
-					<div class="nav-option logout">
+					<div class="nav-option logout" @click.prevent="signOut">
                         <span class="material-symbols-outlined">logout</span> Log out
 					</div>
 
