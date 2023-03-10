@@ -204,7 +204,7 @@ export default {
   data () {
     return {
         departmentsfields:{},
-      epartments: {}
+      departments: {}
     }
   },created () {
     axios.get(`http://localhost:3001/departments`)
