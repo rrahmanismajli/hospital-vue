@@ -4,35 +4,16 @@
       <form @submit.prevent="updateService">
         <div>
           <label for="name">Name:</label>
-          <input type="text" id="name" v-model="department.name" required>
+          <input type="text" id="name" v-model="services.name" required>
         </div>
         <div>
           <label for="description">Description:</label>
-          <textarea id="description" v-model="department.description"></textarea>
+          <textarea id="description" v-model="services.description"></textarea>
         </div>
-        <div>
-          <label for="address">Address:</label>
-          <input type="text" id="address" v-model="department.address">
-        </div>
-        <div>
-          <label for="phone">Phone:</label>
-          <input type="tel" id="phoneNumber" v-model="department.phoneNumber" required>
-        </div>
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="department.email" required>
-        </div>
-        <div>
-          <label for="social-media">Social Media:</label>
-          <input type="text" id="social-media" v-model="socialMedia" @keyup.enter="addSocialMedia">
-          <button type="button" @click="addSocialMedia">Add</button>
-        </div>
-        <ul>
-          <li v-for="(socialMedia, index) in department.socialMedias" :key="index">{{ socialMedia }}</li>
-        </ul>
-        <button type="submit">Update Department</button>
+
+        <button type="submit">Update Service</button>
       </form>
-      <button @click="deleteDepartment">Delete Department</button>
+      <button @click="deleteService">Delete Service</button>
     </div>
   </template>
   
@@ -42,40 +23,33 @@
     
     data() {
       return {
-        department: {},
-        socialMedia: ''
+        services: {},
       }
     },
     async created() {
       try {
-        const departmentId = this.$route.params.id
-        const response = await axios.get(`http://localhost:3001/departments/${departmentId}`)
-        this.department = response.data
+        const servicesId = this.$route.params.id
+        const response = await axios.get(`http://localhost:3001/services/${servicesId}`)
+        this.services = response.data
       } catch (error) {
         console.error(error)
       }
     },
     methods: {
-      addSocialMedia() {
-        if (this.socialMedia) {
-          this.services.socialMedias.push(this.socialMedia)
-          this.socialMedia = ''
-        }
-      },
       async updateService() {
         try {
-          const response = await axios.patch(`http://localhost:3001/departments/${this.department._id}`, this.department)
+          const response = await axios.patch(`http://localhost:3001/${this.services._id}`, this.services)
           console.log(response.data)
-          this.$router.push('/department')
+          this.$router.push('/services')
         } catch (error) {
           console.error(error)
         }
       },
-      async deleteDepartment() {
+      async deleteService() {
         try {
-          const response = await axios.delete(`http://localhost:3001/departments/${this.department._id}`)
+          const response = await axios.delete(`http://localhost:3001/services/${this.services._id}`)
           console.log(response.data)
-          this.$router.push('/department')
+          this.$router.push('/services')
         } catch (error) {
           console.error(error)
         }
