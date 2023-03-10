@@ -62,9 +62,8 @@ router.post('/', upload.single('photo'), async (req, res) => {
     const newDoctor = await doctor.save();
     res.status(201).json(newDoctor);
   } catch (err) {
-    const fileFullPath = path.join(__dirname, filePath.replace('http://localhost:8080', ''));
     if (req.file) {
-      fs.unlink(`${fileFullPath}/${req.file.filename}`, (err) => {
+      fs.unlink(`'../public/doctorimages/${req.file.filename}`, (err) => {
         if (err) {
           console.error(err);
         }
