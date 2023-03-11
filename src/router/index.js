@@ -113,6 +113,11 @@ export default new VueRouter({
         name: 'all-contacts',
         component: () => import('@/components/AdminCruds/ContactUsController/ContactList.vue'),
         props: true
+    },{
+        path: 'adminDash/appointments/',
+        name: 'all-appointments',
+        component: () => import('@/components/AdminCruds/AppointmentsController/AppointmentList.vue'),
+        props: true
     },
 
 
