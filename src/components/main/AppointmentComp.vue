@@ -15,15 +15,27 @@
                 v-on:input="newAppointment.name = $event.target.value">
                     <input v-else type="text" placeholder="Full Name..." class="box" v-bind:value="newAppointment.name"
                         v-on:input="newAppointment.name = $event.target.value">
+                        <div v-if="$v.name.$error">
+                       Name is required.
+                       </div>
                     <input type="number" placeholder="Phone Number..." class="box" v-bind:value="newAppointment.number"
                         v-on:input="newAppointment.number = $event.target.value">
-                        <input v-if="user.loggedIn" ype="email" placeholder="Email..." class="box"  v-bind:value="user.data.email"
+                        <div v-if="$v.number.$error">
+                         Number is required.
+                        </div>
+                        <input v-if="user.loggedIn" type="email" placeholder="Email..." class="box"  v-bind:value="user.data.email"
                         v-on:input="newAppointment.email = $event.target.value">
                     <input v-else type="email" placeholder="Email..." class="box"  v-bind:value="newAppointment.email"
                         v-on:input="newAppointment.email = $event.target.value">
+                        <div v-if="$v.email.$error">
+                         Email is invalid.
+                        </div>
                         
                     <input type="date" placeholder="Date..." class="box" v-bind:value="newAppointment.date"
                         v-on:input="newAppointment.date = $event.target.value">
+                        <div v-if="$v.date.$error">
+                         Date is required.
+                        </div>
                     <input type="submit" value="book now" class="btn">
                 </form>
 
@@ -32,11 +44,13 @@
     </section>
 </template>
 <script>
-
+import { required, email } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
 import db from '../../firebase/db'
 import { mapGetters } from "vuex";
 import firebase from 'firebase';
 export default {
+    mixins: [validationMixin],
     computed: {
     ...mapGetters({
 // map `this.user` to `this.$store.getters.user`
@@ -52,7 +66,21 @@ export default {
                 date: ''
             }
         }
+    }, 
+     validations: {
+    name: {
+      required
     },
+    number:{
+        required
+    },
+    date:{
+        required
+    },
+    email: {
+      email
+    }
+  },
     methods: {
         async handleSubmitAppointment() {
 
