@@ -88,14 +88,13 @@ export default{
       },
       navs:[
         {path:"/",name:"Home"},
-        {path:"/doctor",name:"Doctor"},
+        {path:"/doctors",name:"Doctor"},
+        {path:"/departments",name:"Departments"},
+        {path:"/pharmacy",name:"Pharmacy"},
         {path :"/about",name:"About Us"},
         {path:"/contactus",name:"Contact Us"},
         {path:"/newappointment",name:"Make a Appointment"},
-        {path:"/pharmacy",name:"Pharmacy"},
-        {path:"/departments",name:"Departments"},
-   
-      ],
+          ],
     }
   },  methods: {
     signOut() {

@@ -48,12 +48,16 @@
                         <span class="material-symbols-outlined">stethoscope</span> <router-link :to="{name:'all-doctors'}" class="nav-link text-dark" id="alinklogin">Doctors</router-link>
 					</div>
 
+					<div class="nav-option option2">
+                        <span class="material-symbols-outlined">medical_services</span> <router-link :to="{name:'all-services'}" class="nav-link text-dark" id="alinklogin">Services</router-link>
+					</div>
+
 					<div class="nav-option option4">
                         <span class="material-symbols-outlined">clinical_notes</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Appointments</router-link>
 					</div>
 
 					<div class="nav-option option5">
-                        <span class="material-icons-outlined">poll</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Reports</router-link>
+                        <span class="material-icons-outlined">poll</span> <router-link :to="{name:'all-contacts'}" class="nav-link text-dark" id="alinklogin">Contact Us</router-link>
 					</div>
 
 					<div class="nav-option logout" @click.prevent="signOut">

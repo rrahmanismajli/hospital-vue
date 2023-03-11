@@ -40,8 +40,7 @@ async createServices() {
     // reset form
  
     this.name = '';
-    this.specialization = '';
-    this.experience = 0;
+    this.description = '';
   } catch (err) {
     console.error(err);
   }

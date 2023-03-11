@@ -1,47 +1,224 @@
-<template>
-<div>
-    <h1>Add Product to Stock</h1>
-    <form @submit.prevent="addProduct">
+<template >
+  <section class="products" id="products">
       <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" v-model="productName" required>
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <h1 class="heading"> <span>products</span> </h1>
       </div>
-      <div>
-        <label for="price">Price:</label>
-        <input type="number" id="price" v-model.number="productPrice" required>
+ <div class="box-container">
+  <b-col v-for="products in productsfields" v-bind:key="products._id">
+      <div class="box">
+        <img v-bind:src="`http://localhost:8080/productimages/${products.image}`" v-bind:alt="products.name">
+          <h3>{{ products.name }}</h3>
+          <span>{{ products.description}}</span>
+          <p>{{ products.price }}</p>
+          <p>{{ products.inStock }}</p>
+  
       </div>
-      <div>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" v-model.number="productQuantity" required>
-      </div>
-      <button type="submit">Add Product</button>
-    </form>
+  </b-col>
   </div>
+</section>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      productName: '',
-      productPrice: 0,
-      productQuantity: 0,
-    };
-  },
-  methods: {
-    addProduct() {
-      const product = {
-        name: this.productName,
-        price: this.productPrice,
-        quantity: this.productQuantity,
-      };
-      // TODO: add product to stock
-      console.log(product);
-      this.productName = '';
-      this.productPrice = 0;
-      this.productQuantity = 0;
-    },
-  },
-};
-</script>
-<style>
+<script></script>
+<style >
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+  --green: #16a085;
+  --black: #444;
+  --light-color: #777;
+  --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
+  --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+  --border: .2rem solid var(--green);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all .2s ease-out;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 7rem;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 2rem 9%;
+}
+
+section:nth-child(even) {
+  background: #f5f5f5;
+}
+
+.heading {
+  text-align: center;
+  padding-bottom: 2rem;
+  text-shadow: var(--text-shadow);
+  text-transform: uppercase;
+  color: var(--black);
+  font-size: 5rem;
+  letter-spacing: .4rem;
+}
+
+.heading span {
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.doctors .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+
+.doctors .box-container .box {
+  text-align: center;
+  background: #fff;
+  border-radius: .5rem;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+}
+
+.doctors .box-container .box img {
+  height: 20rem;
+  border: var(--border);
+  border-radius: .5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.doctors .box-container .box h3 {
+  color: var(--black);
+  font-size: 2.5rem;
+}
+
+.doctors .box-container .box span {
+  color: var(--green);
+  font-size: 1.5rem;
+}
+
+.doctors .box-container .box .share {
+  padding-top: 2rem;
+}
+
+.doctors .box-container .box .share a {
+  height: 5rem;
+  width: 5rem;
+  line-height: 4.5rem;
+  font-size: 2rem;
+  color: var(--green);
+  border-radius: .5rem;
+  border: var(--border);
+  margin: .3rem;
+}
+
+.doctors .box-container .box .share a:hover {
+  background: var(--green);
+  color: #fff;
+  box-shadow: var(--box-shadow);
+}
+
+
+
+
+/* media queries  */
+@media (max-width:991px) {
+
+  html {
+      font-size: 55%;
+  }
+
+  .header {
+      padding: 2rem;
+  }
+
+  section {
+      padding: 2rem;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  #menu-btn {
+      display: initial;
+  }
+
+  .header .navbar {
+      position: absolute;
+      top: 115%;
+      right: 2rem;
+      border-radius: .5rem;
+      box-shadow: var(--box-shadow);
+      width: 30rem;
+      border: var(--border);
+      background: #fff;
+      transform: scale(0);
+      opacity: 0;
+      transform-origin: top right;
+      transition: none;
+  }
+
+  .header .navbar.active {
+      transform: scale(1);
+      opacity: 1;
+      transition: .2s ease-out;
+  }
+
+  .header .navbar a {
+      font-size: 2rem;
+      display: block;
+      margin: 2.5rem;
+  }
+
+}
+
+@media (max-width:450px) {
+
+  html {
+      font-size: 50%;
+  }
+
+}
 </style>
+
+<script>
+/* eslint-disable */
+import axios from 'axios'
+export default {
+name: 'Products',
+data () {
+  return {
+    productsfields:{},
+    products: {}
+  }
+},created () {
+  axios.get(`http://localhost:3001/products`)
+  .then(response => {
+    this.productsfields = response.data
+  })
+  .catch(e => {
+    this.errors.push(e)
+  })
+},
+methods: {
+  onSubmit (evt) {
+    evt.preventDefault()
+    axios.post(`http://localhost:3001/products`, this.products)
+    .then(function (response) {
+      console.log(response);
+      })
+    
+  }
+}
+}
+</script>
