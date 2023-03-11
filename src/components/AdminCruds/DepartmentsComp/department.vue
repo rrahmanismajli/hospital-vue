@@ -22,7 +22,7 @@
             <td>{{ department.email }}</td>
             <td>
               <router-link :to="{ name: 'edit-department', params: { id: department._id } }" class="btn btn-primary">Edit</router-link>
-              <button @click="deleteDepartment(department._id)" class="btn btn-danger">Delete</button>
+              <button @click="confirmDelete(department._id)" class="btn btn-danger">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -34,7 +34,7 @@
   
   <script>
   import axios from 'axios';
-  
+  import swal from 'sweetalert'
   export default {
     name: 'DepartmentsComp',
     data() {
@@ -54,18 +54,48 @@
           .catch(error => {
             console.log(error);
           });
-      },/*eslint-disable*/
+      },confirmDelete(id) {
+      swal({
+        title: 'Are you sure you want to delete this file?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+      buttons:{
+        cancel: "Cancel",
+        delete:{
+          text:"Yes,Delete it",
+          value:true,
+        }
+      }
+      }).then((value) => {
+        if (value) {
+          // User clicked the "Yes, delete it!" button
+          // Call your delete file function here
+          this.deleteDepartment(id);
+        }
+      });
+    },
+      /*eslint-disable*/
       deleteDepartment(id) {
-        if (confirm('Are you sure you want to delete this department?')) {
-          axios.delete(`/departments/${id}`)
+         
+          axios.delete(`http://localhost:3001/departments/${id}`)
             .then(response => {
               this.getDepartments();
+              swal({
+          title: 'Deleted!',
+          text: 'The Department has been deleted.',
+          icon: 'success'
+        });
             })
             .catch(error => {
+              swal({
+          title: 'Error!',
+          text: `${error.message}`,
+          icon: 'warning'
+        });
               console.log(error);
             });
         }
-      }
+      
     }
   }
   </script>

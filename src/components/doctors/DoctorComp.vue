@@ -63,6 +63,7 @@ export default {
       formData.append('experience', this.experience);
       formData.append('photo', this.photo);
 
+
       axios.post('http://localhost:3001/doctors', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'

@@ -55,7 +55,7 @@
         axios.put(`http://localhost:3001/doctors/${this.$route.params.id}`, formData)
           .then((response) => {
             // Redirect to the admin page after updating the doctor
-            this.$router.push("/admin");
+            this.$router.push({name: 'all-doctors',});
           })
           .catch((error) => {
             console.error(error);

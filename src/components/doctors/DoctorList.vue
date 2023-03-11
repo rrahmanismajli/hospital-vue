@@ -23,7 +23,7 @@
             </td>
             <td>
               <button class="btn btn-primary" @click="editDoctor(doctor)">Edit</button>
-              <button class="btn btn-danger" @click="deleteDoctor(doctor)">Delete</button>
+              <button class="btn btn-danger" @click.prevent="confirmDelete(doctor)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -55,16 +55,46 @@ import swal from 'sweetalert';
       },
       editDoctor(doctor) {
         this.$router.push({ name: 'edit-doctor', params: { id: doctor._id } });
-      },
+      },confirmDelete(doctor) {
+      swal({
+        title: 'Are you sure you want to delete this file?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+      buttons:{
+        cancel:"Cancel",
+        delete:{
+          text:"Yes,Delete it",
+          value:true,
+        }
+      }
+      }).then((value) => {
+        if (value) {
+          // User clicked the "Yes, delete it!" button
+          // Call your delete file function here
+          this.deleteDoctor(doctor);
+        }
+      });
+    },
       async deleteDoctor(doctor) {
-        if (swal("Good job!", `Are you sure you want to delete ${doctor.name}?`, "success")) {
+      
           try {
             await axios.delete(`http://localhost:3001/doctors/${doctor._id}`);
             this.doctors = this.doctors.filter((d) => d._id !== doctor._id);
+            swal({
+          title: 'Deleted!',
+          text: 'The doctor has been deleted.',
+          icon: 'success'
+        });
           } catch (error) {
+
+            Swal.fire({
+          title: 'Error!',
+          text: `${error.message}`,
+          icon: 'warning'
+        });
             console.error(error);
           }
-        }
+        
       },
     },
   };
