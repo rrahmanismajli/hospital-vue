@@ -31,6 +31,7 @@
       return {
         doctor: {},
         photo: null,
+       
       };
     },
     created() {
@@ -54,10 +55,12 @@
   
         axios.put(`http://localhost:3001/doctors/${this.$route.params.id}`, formData)
           .then((response) => {
+            swal("Good job!", "Doctor Edited!", "success");
             // Redirect to the admin page after updating the doctor
             this.$router.push({name: 'all-doctors',});
           })
           .catch((error) => {
+            swal("Error!",`${error.message}`, "warning");
             console.error(error);
           });
       },

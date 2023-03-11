@@ -15,15 +15,14 @@
 					v-on:input="newContact.email = $event.target.value">
 				<input type="number" placeholder="Phone Number..." class="contact-form-txt"
 					v-bind:value="newContact.phonenumber" v-on:input="newContact.phonenumber = $event.target.value">
-				<textarea placeholder="Message" class="contact-form-textarea" v-bind:value="newContact.message"
-					v-on:input="newContact.message = $event.target.value"></textarea>
+				<textarea placeholder="Message" class="contact-form-textarea" v-model="newContact.message"></textarea>
 				<input type="submit" name="Submit" class="contact-form-btn" />
 			</form>
 		</div>
 	</div>
 </template>
 <script>
-import { addDoc, collection } from 'firebase/firestore';
+import firebase from 'firebase';
 import db from '../../firebase/db'
 export default {
 	data() {
@@ -39,16 +38,19 @@ export default {
 	methods: {
 		async handleSubmitContact() {
 			console.log('Attempting to create Contact')
+			const userId = firebase.auth().currentUser.uid.valueOf();
+            console.log(userId);
 			//validation
 			if (
 				!this.newContact.name.trim() ||
 				!this.newContact.message.trim()
 			) return;
 			// create a new post
-			console.log('make request to create new contac -> ', this.newContact);
+			console.log('make request to create new contact -> ', this.newContact);
 			try {
-				const result = await addDoc(collection(db, "contact"), { ...this.newContact })
-				console.log(result);
+				const result = await db.collection('contacts').add({ ...this.newContact })
+                console.log(result);
+		
 			} catch (err) {
 				console.error(err);
 			}

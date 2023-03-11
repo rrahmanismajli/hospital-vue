@@ -8,6 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
+
     <ul class="navbar-nav mr-auto">
       <li
       v-for="route in navs"
@@ -74,6 +75,7 @@
 
 import { mapGetters } from "vuex";
 import firebase from "firebase";
+
 export default{
   computed: {
     ...mapGetters({
@@ -81,6 +83,7 @@ export default{
       user: "user"
     })
   },
+ 
   data(){
     return{
       const:{
@@ -88,7 +91,7 @@ export default{
       },
       navs:[
         {path:"/",name:"Home"},
-        {path:"/doctors",name:"Doctor"},
+        
         {path:"/departments",name:"Departments"},
         {path:"/pharmacy",name:"Pharmacy"},
         {path :"/about",name:"About Us"},

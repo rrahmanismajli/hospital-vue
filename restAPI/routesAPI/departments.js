@@ -83,15 +83,8 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 });
-// Delete a department by ID
-router.delete('/:id', getDepartment, async (req, res) => {
-  try {
-    await res.department.deletOne();
-    res.json({ message: 'Department deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+
+
 
 // Middleware function to get a single department by ID
 async function getDepartment(req, res, next) {

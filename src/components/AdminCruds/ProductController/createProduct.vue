@@ -1,60 +1,82 @@
 <template>
-    <div>
-        <form  @submit.prevent="createServices">
-      <label for="name">Product Name:</label>
-
-      <input type="text" id="name" v-model="product.name">
-  
-      <label for="price">Product Price:</label>
-      <input type="text" id="price" v-model="product.price">
-  
-      <label for="image">Product Image URL:</label>
-      <input type="text" id="image" v-model="product.image">
-  
-      <label for="description">Product Description:</label>
-      <textarea id="description" v-model="product.description"></textarea>
-  
-      <button @click="createProduct">Create Product</button>
+  <div>
+    <h1>Create New Product</h1>
+    <form @submit.prevent="submitForm">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="name" required>
+      </div>
+      <div>
+        <label for="Price">Price:</label>
+        <input type="currency" id="price" v-model="price" required>
+      </div>
+      <div>
+        <label for="specialization">Created by:</label>
+        <input disabled v-bind:value="user.data.displayName" type="text" id="Author"  required>
+      </div>
+      <div>
+        <label for="experience">Stock:</label>
+        <input type="number" id="stock" v-model="stock" required>
+      </div>
+      <div>
+        <label for="image">Photo:</label>
+        <input type="file" id="image" @change="onFileChange" required>
+      </div>
+      <button type="submit">Create Product</button>
     </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        product: {
-          name: '',
-          price: '',
-          image: '',
-          description: ''
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { mapGetters } from 'vuex';
+import swal from 'sweetalert';
+/*eslint-disable*/
+export default {
+  computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
+  data() {
+    return {
+      name: '',
+      price: '',
+      stock: '',
+      image: null,
+      
+    };
+  },
+  methods: {
+    submitForm() {
+      const formData = new FormData();
+      formData.append('name', this.name);
+      formData.append('price', this.price);
+      formData.append('stock', this.stock);
+      formData.append('image', this.image);
+      formData.append('author', this.user.data.displayName);
+
+
+      axios.post('http://localhost:3001/products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-      }
+      })
+      .then(response => {
+        swal("Success!", "Product Created!", "success");
+
+        console.log(response.data);
+        this.$router.push({name: 'all-products',})
+      })
+      .catch(error => {
+        swal("Error!", error.message, "error");
+        console.log(error.response.data);
+      });
     },
-    methods: {
-        async createProduct() {
-
-        try {
-    const response = await axios.post(`http://localhost:3001/services`, {
-   
-      name: this.product.name,
-      price: this.product.price,
-      image:this.product.image,
-      description:this.product.description
-
-
-    });
-    console.log(response.data);
-       
-        this.product.price = '';
-        this.product.image = '';
-        this.product.description = '';
-      }   catch (err) {
-    console.error(err);
+    onFileChange(event) {
+      this.image = event.target.files[0];
+    }
   }
-
-  
-}
-}}
-  </script>
-  
+};
+</script>

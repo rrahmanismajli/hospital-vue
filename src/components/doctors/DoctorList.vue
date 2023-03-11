@@ -9,6 +9,7 @@
             <th>Name</th>
             <th>Specialization</th>
             <th>Experience</th>
+            <th>Created by</th>
             <th>Photo</th>
             <th>Actions</th>
           </tr>
@@ -18,6 +19,7 @@
             <td>{{ doctor.name }}</td>
             <td>{{ doctor.specialization }}</td>
             <td>{{ doctor.experience }}</td>
+            <td>{{ doctor.author }}</td>
             <td>
               <img width="75px" height="75px" :src="'http://localhost:8080/doctorimages/' + doctor.photo" alt="Doctor Photo">
             </td>

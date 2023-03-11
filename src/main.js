@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './firebase';
 import store from "./store";
-
+import './assets/colors.css'
 
 Vue.config.productionTip = false
 

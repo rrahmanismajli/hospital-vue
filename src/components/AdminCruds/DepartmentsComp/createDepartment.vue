@@ -37,6 +37,7 @@
 
 <script>
 import axios from 'axios'
+import swal from 'sweetalert'
 export default {
  
   data() {
@@ -62,8 +63,9 @@ export default {
     async createDepartment() {
       try {
         const response = await axios.post('http://localhost:3001/departments', this.department)
+        swal("Good job!", "Department Created!", "success");
         console.log(response.data)
-        this.$router.push('/department')
+        this.$router.push({name: 'departmentoperation',})
       } catch (error) {
         console.error(error)
       }

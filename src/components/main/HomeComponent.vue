@@ -40,12 +40,21 @@
 
     <div class="box-container">
         <b-col v-for="services  in servicesfields" v-bind:key="services._id">
-        <div class="box">
-            <i class="fas fa-notes-medical"></i>
-            <h3>{{ services.name }}</h3>
-            <p>{{ services.description}}</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
+            <div class="card mb-4 shadow-sm">
+                <img v-bind:src="`http://localhost:8080/static/servicesBackgroundImg/${services.backgroundImage}`" class="card-img-top" alt="Service Photo">
+                <div class="card-body">
+                  <h5 class="card-title">{{services.name}}</h5>
+                  <p class="card-text">{{ services.description }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">Price: $100</small>
+                  </div>
+                </div>
+              </div>
+              
     </b-col>
       <!-- <div class="box">
             <i class="fas fa-ambulance"></i>

@@ -51,6 +51,7 @@ router.post('/', upload.single('photo'), async (req, res) => {
     specialization: req.body.specialization,
     experience: req.body.experience,
     photo: req.file ? req.file.filename : null,
+    author:req.body.author,
      socialMedias: req.body.socialMedias,
   });
 

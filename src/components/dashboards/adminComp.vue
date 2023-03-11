@@ -35,12 +35,18 @@
 			<nav class="nav">
 				<div class="nav-upper-options">
 					<div class="nav-option option1 text-danger">
-          <span class="material-icons-outlined text-info">dashboard</span> Dashboard
+          <span class="material-icons-outlined text-info">dashboard</span> <router-link :to="{name:'admin'}" class="nav-link text-dark" id="alinklogin">Dashboard</router-link>
+							
 						</div>
 
 					<div class="option2 nav-option">
                         <span class="material-icons-outlined">inventory_2</span>  
 							<router-link :to="{name:'departmentoperation'}" class="nav-link text-dark" id="alinklogin">Departments</router-link>
+							
+					</div>
+						<div class="option2 nav-option">
+                        <span class="material-icons-outlined">inventory_2</span>  
+							<router-link :to="{name:'all-products'}" class="nav-link text-dark" id="alinklogin">Products</router-link>
 							
 					</div>
 

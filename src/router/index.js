@@ -34,21 +34,20 @@ export default new VueRouter({
     },
     {
         path: '/pharmacy', name: 'pharamcy', component: () => import('@/components/main/PharmacyComp.vue')
-    }
-
-        , {
-        path: '/adminDash', name: 'admin', component: () => import('@/components/dashboards/adminComp.vue')
-
-    }, {
-        path: '/userDash', name: 'userDash', component: () => import('@/components/dashboards/userComp.vue')
+    } , {
+        path: '/adminDash', name: 'admin', component: () => import('@/components/dashboards/adminComp.vue'), meta: {
+            requiresAuth: true
+        }
 
     }, {
-        path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/main/PharmacyComp.vue')
-    }/* {
-        path: '/pharmacy', name: 'pharmacy', component: () => import('@/components/pharmacy/Pharmacy.vue')
+        path: '/userDash', name: 'userDash', component: () => import('@/components/dashboards/userComp.vue'), meta: {
+            requiresAuth: true
+        }
 
-    }*/, {
-        path: '/adminDash/doctor', name: 'doctorCrud', component: () => import('@/components/doctors/DoctorComp.vue')
+    },  {
+        path: '/adminDash/doctor', name: 'doctorCrud', component: () => import('@/components/doctors/DoctorComp.vue'), meta: {
+            requiresAuth: true
+        }
 
     }, {
         path: '/adminDash/department', name: 'departmentoperation', component: () => import('@/components/AdminCruds/DepartmentsComp/department.vue'), meta: {
@@ -57,15 +56,17 @@ export default new VueRouter({
 
     }, {
         path: '/departments', name: 'department', component: () => import('@/components/main/DepartmentComponent.vue'), meta: {
-
+            requiresAuth: true
         }
 
     }, {
         path: '/doctors', name: 'doctor', 
         component: () => import('@/components/main/DoctorComponent.vue'), 
+        
         meta: {
-
+            requiresAuth: true
         }
+
 
     }, {
         path: '/adminDash/department/create',
@@ -79,23 +80,57 @@ export default new VueRouter({
         path: 'adminDash/doctors/',
         name: 'all-doctors',
         component: () => import('@/components/doctors/DoctorList.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     }, {
         path: '/departments/:id/edit',
         name: 'edit-department',
         component: () => import('@/components/AdminCruds/DepartmentsComp/editDepartment.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     }, {
         path: 'adminDash/doctors/:id/edit',
         name: 'edit-doctor',
         component: () => import('@/components/doctors/EditDoctor.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     }, {
         path: 'adminDash/services/',
         name: 'all-services',
         component: () => import('@/components/AdminCruds/ServicesController/service.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     }, {
+        path: 'adminDash/products/',
+        name: 'all-products',
+        component: () => import('@/components/AdminCruds/ProductController/product.vue'),
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
+    },{
+        path: 'adminDash/products/create',
+        name: 'create-product',
+        component: () => import('@/components/AdminCruds/ProductController/createProduct.vue'),
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
+    },{
         path: '/adminDash/services/create',
         name: 'servicecreate',
         component: () => import('@/components/AdminCruds/ServicesController/createServices.vue'),
@@ -107,12 +142,20 @@ export default new VueRouter({
         path: '/services/:id/edit',
         name: 'edit-services',
         component: () => import('@/components/AdminCruds/ServicesController/editService.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     }, {
         path: 'adminDash/contacts/',
         name: 'all-contacts',
         component: () => import('@/components/AdminCruds/ContactUsController/ContactList.vue'),
-        props: true
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
     },
 
 

@@ -8,7 +8,8 @@ const servicesSchema = new mongoose.Schema({
   description:{
     type: String,
     required: true
-  }
+  },
+  backgroundImage:String
 });
 
 module.exports = mongoose.model('services', servicesSchema);

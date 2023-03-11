@@ -24,9 +24,9 @@ export default new Vuex.Store({
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
     },
-    SET_USER(state, data,role) {
+    SET_USER(state, data) {
       state.user.data = data;
-      state.user.role=role;
+    
     },
     SET_ROLE(state,rol){     
       state.user.role=rol;
@@ -41,9 +41,7 @@ export default new Vuex.Store({
           displayName: user.displayName,
           email: user.email,
          
-        },{
-          role:user.role,
-        });
+        },);
       
       } else {
         commit("SET_USER", null);

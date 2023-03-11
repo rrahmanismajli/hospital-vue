@@ -7,11 +7,11 @@
  <div class="box-container">
   <b-col v-for="products in productsfields" v-bind:key="products._id">
       <div class="box">
-        <img v-bind:src="`http://localhost:8080/productimages/${products.image}`" v-bind:alt="products.name">
+        <img class="img-fluid" width="100px" height="50px" v-bind:src="`http://localhost:8080/static/pharmacyImages/${products.image}`" v-bind:alt="products.name">
           <h3>{{ products.name }}</h3>
-          <span>{{ products.description}}</span>
-          <p>{{ products.price }}</p>
-          <p>{{ products.inStock }}</p>
+          <p>{{ products.price }}$</p>
+          <p>Added By:{{products.author}}</p>
+  
   
       </div>
   </b-col>

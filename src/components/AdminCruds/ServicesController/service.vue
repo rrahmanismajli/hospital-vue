@@ -18,7 +18,7 @@
             <td>{{ services.description }}</td>
             <td>
               <router-link :to="{ name: 'edit-services', params: { id: services._id } }" class="btn btn-primary">Edit</router-link>
-              <button @click="deleteServices(services._id)" class="btn btn-danger">Delete</button>
+              <button @click="confirmDelete(services._id)" class="btn btn-danger">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -30,7 +30,7 @@
   
   <script>
   import axios from 'axios';
-  
+  import swal from 'sweetalert';
   export default {
     name: 'ServicesComp',
     data() {
@@ -42,6 +42,7 @@
       this.getServices();
     },
     methods: {
+
         getServices() {
         axios.get('http://localhost:3001/services/')
           .then(response => {
@@ -50,17 +51,43 @@
           .catch(error => {
             console.log(error);
           });
-      },/*eslint-disable*/
+      },confirmDelete(id) {
+      swal({
+        title: 'Are you sure you want to delete this file?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+      buttons:{
+        cancel:"Cancel",
+        delete:{
+          text:"Yes,Delete it",
+          value:true,
+        }
+      }
+      }).then((value) => {
+        if (value) {
+          // User clicked the "Yes, delete it!" button
+          // Call your delete file function here
+          this.deleteServices(id);
+        }
+      });
+    },
+      
+      /*eslint-disable*/
       deleteServices(id) {
-        if (confirm('Are you sure you want to delete this department?')) {
-          axios.delete(`/services/${id}`)
+        
+          axios.delete(`http://localhost:3001/services/${id}`)
             .then(response => {
               this.getServices();
+              swal({
+          title: 'Deleted!',
+          text: 'The Department has been deleted.',
+          icon: 'success'
+        });
             })
             .catch(error => {
               console.log(error);
             });
-        }
+        
       }
     }
   }

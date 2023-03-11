@@ -8,12 +8,12 @@
 
 <script>
 import Slider from '@/components/SliderComp.vue';
-//import Doctor from '@/components/main/DoctorComponent.vue'
+import Doctor from '@/components/main/DoctorComponent.vue'
 export default {
   name: 'sliderComp',
   components: {
     Slider,
-    //Doctor
+    Doctor
   }
 }
 </script>

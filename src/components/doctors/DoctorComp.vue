@@ -11,6 +11,10 @@
         <input type="text" id="specialization" v-model="specialization" required>
       </div>
       <div>
+        <label for="specialization">Created by:</label>
+        <input disabled v-bind:value="user.data.displayName" type="text" id="Author"  required>
+      </div>
+      <div>
         <label for="experience">Experience:</label>
         <input type="number" id="experience" v-model="experience" required>
       </div>
@@ -33,9 +37,16 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 import swal from 'sweetalert';
 /*eslint-disable*/
 export default {
+  computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
       name: '',
@@ -62,6 +73,8 @@ export default {
       formData.append('specialization', this.specialization);
       formData.append('experience', this.experience);
       formData.append('photo', this.photo);
+      formData.append('author', this.user.data.displayName);
+      formData.append('socialMedias',this.socialMedias);
 
 
       axios.post('http://localhost:3001/doctors', formData, {

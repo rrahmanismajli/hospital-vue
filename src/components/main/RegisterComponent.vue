@@ -122,7 +122,7 @@ export default{
             name: "login"
           });
         });
-      //  this.$store.commit('SET_ROLE', this.role)
+        this.$store.commit('SET_ROLE', this.role)
         })
         .catch(err => {
           this.error = err.message;

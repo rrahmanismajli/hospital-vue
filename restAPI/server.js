@@ -5,8 +5,10 @@ const  cors = require('cors');
 const  mongoose = require('mongoose');
 //const  config = require('./DB');
 const  doctors = require ('./routesAPI/doctors');
+const services = require('./routesAPI/services')
 
 const  departments = require ('./routesAPI/departments');
+const  products = require ('./routesAPI/products');
       
 const app = express();
 var port = process.env.PORT || 3001;
@@ -29,6 +31,8 @@ console.log("connected to Mongo");
 
 app.use('/doctors', doctors);
 app.use('/departments', departments);
+app.use('/services',services);
+app.use('/products',products);
 
 
 

@@ -2,7 +2,7 @@
     <div>
       <h1>Services</h1>
   
-      <router-link to="/adminDash/products/create" class="btn btn-primary">New Product</router-link>
+      <router-link :to="{name:'create-product'}" class="btn btn-primary">New Product</router-link>
   
       <table class="table">
         <thead>
@@ -10,7 +10,7 @@
             <th>Name</th>
         <th>Price</th>
         <th>Image</th>
-        <th>Description</th>
+        <th>Stock</th>
         <th>Actions</th>
 
           </tr>
@@ -19,11 +19,11 @@
       <tr v-for="product in products" :key="product.id">
         <td>{{ product.name }}</td>
         <td>{{ product.price }}</td>
-        <td><img :src="product.image" alt="Product Image" width="50"></td>
-        <td>{{ product.description }}</td>
+        <td><img :src="`http://localhost:8080/static/pharmacyImages/${product.image}`" alt="Product Image" width="50"></td>
+        <td>{{ product.stock }}</td>
         <td>
-          <router-link :to="'/edit-product/' + product.id">Edit</router-link>
-          <button @click="deleteProduct(product.id)">Delete</button>
+          <button class="btn btn-primary" @click="editDoctor(product)">Edit</button>
+          <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -35,7 +35,7 @@
   
   <script>
   
-  
+  import axios from 'axios'
   export default {
     name: 'ProductsComp',
     data() {
@@ -47,6 +47,9 @@
       this.getProducts();
     },
     methods: {
+      editProducts(product) {
+        this.$router.push({ name: 'edit-doctor', params: { id: product._id } });
+      },
         getProducts() {
         axios.get('http://localhost:3001/products/')
           .then(response => {
