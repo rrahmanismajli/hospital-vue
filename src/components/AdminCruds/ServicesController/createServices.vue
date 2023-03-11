@@ -1,19 +1,19 @@
 <template>
-    <div>
-      <h1>Create a new service</h1>
-      <form @submit.prevent="createServices">
-       
-        <label>
-          Name:
-          <input type="text" v-model="name" required>
-          <div v-if="$v.name.$error">Name is required.</div>
-        </label>
-        
-        <label>
-          Description:
-          <input type="text" v-model="description" required>
-          <div v-if="$v.description.$error">Description is required.</div>
-        </label>
+  <div>
+    <h1>Create New Service Card</h1>
+    <form @submit.prevent="submitForm">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="name" required>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" v-model="description" required>
+      </div>
+      <div>
+        <label for="backgroundImage">Background Image:</label>
+        <input type="file" id="backgroundImage" @change="onFileChange" required>
+      </div>
 
       <button type="submit">Create Service Card</button>
     </form><br><br>
@@ -33,46 +33,7 @@
         </div>
       </div>
     </div>
-  </template>
-
-<script>
-import axios from 'axios';
-import { required } from 'vuelidate/lib/validators'
-import { validationMixin } from 'vuelidate'
-export default {
-  mixins: [validationMixin],
-name: 'createServices',
-data () {
-return {
-    name: '',
-  description: '',
-}
-},  
-validations: {
-    name: {
-      required
-    },
-    description:{
-        required
-    },
-  },
-methods: {
-async createServices() {
-    try {
-    const response = await axios.post(`http://localhost:3001/services`, {
-   
-      name: this.name,
-      description: this.description
-    });
-    console.log(response.data);
-    this.$router.push({name: 'all-services',})
-    // reset form
- 
-    this.name = '';
-    this.description = '';
-  } catch (err) {
-    console.error(err);
-  }
+  </div>
 
   
   </div>

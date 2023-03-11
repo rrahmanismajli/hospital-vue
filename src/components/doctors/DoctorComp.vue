@@ -45,7 +45,12 @@ import { mapGetters } from 'vuex';
 import swal from 'sweetalert';
 /*eslint-disable*/
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin],  computed: {
+    ...mapGetters({
+// map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
       name: '',
