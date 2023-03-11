@@ -59,7 +59,7 @@
 					</div>
 
 					<div class="nav-option option4">
-                        <span class="material-symbols-outlined">clinical_notes</span> <router-link to="adminDash" class="nav-link text-dark" id="alinklogin">Appointments</router-link>
+                        <span class="material-symbols-outlined">clinical_notes</span> <router-link  :to="{name:'all-appointments'}" class="nav-link text-dark" id="alinklogin">Appointments</router-link>
 					</div>
 
 					<div class="nav-option option5">
@@ -634,6 +634,7 @@ border-radius: 4px;
 .searchbar2 input {
 	width: 180px;
 }
+
 }
 
 </style>

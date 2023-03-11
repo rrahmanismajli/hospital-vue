@@ -5,10 +5,12 @@
       <div>
         <label for="name">Name:</label>
         <input type="text" id="name" v-model="name" required>
+        <div v-if="$v.name.$error">Name is required.</div>
       </div>
       <div>
         <label for="specialization">Specialization:</label>
         <input type="text" id="specialization" v-model="specialization" required>
+        <div v-if="$v.specialization.$error">Specialization is required.</div>
       </div>
       <div>
         <label for="specialization">Created by:</label>
@@ -17,11 +19,12 @@
       <div>
         <label for="experience">Experience:</label>
         <input type="number" id="experience" v-model="experience" required>
+        <div v-if="$v.experience.$error">Experience is required.</div>
       </div>
       <div>
         <label for="photo">Photo:</label>
         <input type="file" id="photo" @change="onFileChange" required>
-      </div>
+        </div>
       <div>
         <label for="social-media">Social Media:</label>
         <input type="text" id="social-media" v-model="socialMedia" @keyup.enter="addSocialMedia">
@@ -36,17 +39,13 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 import swal from 'sweetalert';
 /*eslint-disable*/
 export default {
-  computed: {
-    ...mapGetters({
-// map `this.user` to `this.$store.getters.user`
-      user: "user"
-    })
-  },
+  mixins: [validationMixin],
   data() {
     return {
       name: '',
@@ -55,7 +54,18 @@ export default {
       photo: null,
       socialMedias: [],
       socialMedia:''
-    };
+    }
+  },  
+  validations: {
+    name: {
+      required
+    },
+    specialization:{
+        required
+    },
+    experience:{
+        required
+    }
   },
   methods: {
     addSocialMedia() {
@@ -97,5 +107,5 @@ export default {
       this.photo = event.target.files[0];
     }
   }
-};
+}
 </script>

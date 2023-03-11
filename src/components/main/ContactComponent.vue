@@ -10,12 +10,13 @@
 			<h1>Contact Us</h1>
 			<form v-on:submit.prevent="handleSubmitContact">
 				<input type="text" placeholder="Full Name..." class="contact-form-txt" v-bind:value="newContact.name"
-					v-on:input="newContact.name = $event.target.value">
+					v-on:input="newContact.name = $event.target.value" required>
 				<input type="email" placeholder="Email..." class="contact-form-txt" v-bind:value="newContact.email"
-					v-on:input="newContact.email = $event.target.value">
+					v-on:input="newContact.email = $event.target.value" required>
 				<input type="number" placeholder="Phone Number..." class="contact-form-txt"
 					v-bind:value="newContact.phonenumber" v-on:input="newContact.phonenumber = $event.target.value">
-				<textarea placeholder="Message" class="contact-form-textarea" v-model="newContact.message"></textarea>
+				<textarea placeholder="Message" class="contact-form-textarea" v-bind:value="newContact.message"
+					v-on:input="newContact.message = $event.target.value" required></textarea>
 				<input type="submit" name="Submit" class="contact-form-btn" />
 			</form>
 		</div>
