@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
-// GET all doctors
+
 router.get('/', async (req, res) => {
   try {
     const doctors = await Doctors.find();
@@ -19,14 +19,11 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a single doctor
+
 router.get('/:id', getDoctor, (req, res) => {
   res.json(res.doctor);
 });
 
-// CREATE a doctor
-
-// Set up multer storage and file filter
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, '../public/doctorimages');
@@ -48,7 +45,6 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-// CREATE a doctor
 router.post('/', upload.single('photo'), async (req, res) => {
   const doctor = new Doctors({
     name: req.body.name,
@@ -73,7 +69,6 @@ router.post('/', upload.single('photo'), async (req, res) => {
   }
 });
 
-// UPDATE a doctor
 router.put('/:id', upload.single('photo'), getDoctor, async (req, res) => {
   if (req.body.name != null) {
     res.doctor.name = req.body.name;
@@ -88,16 +83,17 @@ router.put('/:id', upload.single('photo'), getDoctor, async (req, res) => {
   }
 
   if (req.file) {
-    // delete previous photo file
+   
     if (res.doctor.photo) {
-      fs.unlink(`http://localhost:8080/doctorimages/${res.doctor.photo}`, (err) => {
+      const filePath = `C:/Users/rrahm/OneDrive/Desktop/Betimi/hospital-vue/public/doctorimages/${res.doctor.photo}`;
+      fs.unlink(filePath, (err) => {
         if (err) {
           console.error(err);
         }
       });
     }
 
-    // save new photo file
+
     res.doctor.photo = req.file.filename;
   }
 
@@ -117,7 +113,6 @@ router.put('/:id', upload.single('photo'), getDoctor, async (req, res) => {
 });
 
 
-// DELETE a doctor
 router.delete('/:id', async (req, res) => {
   try {
     const doctor = await Doctors.findById(req.params.id);
@@ -132,7 +127,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Middleware function to get a doctor by ID
+
 async function getDoctor(req, res, next) {
   let doctor;
   try {

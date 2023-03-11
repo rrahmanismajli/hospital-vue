@@ -11,10 +11,10 @@
             <h3>{{ doctor.name }}</h3>
             <span>{{ doctor.specialization}}</span>
             <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
+                <a v-bind:href="doctor.socialMedias[0]" class="fab fa-facebook-f"></a>
+                <a v-bind:href="doctor.socialMedias[1]" class="fab fa-instagram"></a>
+                <a v-bind:href="doctor.socialMedias[2]"  class="fab fa-twitter"></a>
+                <a v-bind:href="doctor.socialMedias[3]" class="fab fa-linkedin"></a>
             </div>
         </div>
     </b-col>
