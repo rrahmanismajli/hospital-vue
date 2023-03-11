@@ -1,98 +1,224 @@
-<template>
+<template >
+  <section class="products" id="products">
+      <div>
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <h1 class="heading"> <span>products</span> </h1>
+      </div>
+ <div class="box-container">
+  <b-col v-for="products in productsfields" v-bind:key="products._id">
+      <div class="box">
+        <img v-bind:src="`http://localhost:8080/productimages/${products.image}`" v-bind:alt="products.name">
+          <h3>{{ products.name }}</h3>
+          <span>{{ products.description}}</span>
+          <p>{{ products.price }}</p>
+          <p>{{ products.inStock }}</p>
+  
+      </div>
+  </b-col>
+  </div>
+</section>
+</template>
+<script></script>
+<style >
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
-  <div class="container features">
-      <div class="row">
-    <h1>Add a Product</h1>
-  </div>
-  <br>
-    <div class="row">
-  
-      <div class="col-lg-12 col-md-12 col-sm-12">
-      <form @submit="onSubmit">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Medical Product" id="name">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" rows="4" placeholder="Description" id="description"></textarea>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" placeholder="Image" v-model="products.image">
-        </div> -->
-        <div class="form-group">
-          <label for="picture">Picture</label>
-          <input type="file" id="image" name="image"  class="form-control-file"  @change="onFileChange" >
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" placeholder="Price" id="price">
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" placeholder="In Stock" id="inStock">
-        </div>
-        <input type="submit" class="btn" value="Save" id="sendcontact">
-      </form>
-      </div>
-      </div>
-  </div>
-  </template>
-  <script>
-  /* eslint-disable */
-  import axios from 'axios'
-  export default {
-    name: 'CreateProducts',
-    data () {
-      return {
-        products:{},
-      }
-    },
-    methods: {
-      onFileChange(e) {
-        const file = e.target.files[0];
-        
-        console.log(file);
-      },
-      onSubmit (evt) {
-        evt.preventDefault();
-        var bodyFormData = new FormData();
-        
-        let image = document.getElementById("image");
-        bodyFormData.set("name", document.getElementById("name").value);
-        bodyFormData.set("price", document.getElementById("price").value);
-        bodyFormData.set("description", document.getElementById("description").value);
-        bodyFormData.set("inStock", document.getElementById("inStock").value);
-        bodyFormData.append("image", image.files[0]);
-        
-        axios.post(`http://localhost:4000/products`, bodyFormData)
-        .then(response => {
-          //console.log(response);
-          this.$router.push({
-            name: 'home',
-            //params: { id: response.data._id }
-          })
-          })
-        
-      }
-    }
+:root {
+  --green: #16a085;
+  --black: #444;
+  --light-color: #777;
+  --box-shadow: .5rem .5rem 0 rgba(22, 160, 133, .2);
+  --text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+  --border: .2rem solid var(--green);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all .2s ease-out;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 7rem;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 2rem 9%;
+}
+
+section:nth-child(even) {
+  background: #f5f5f5;
+}
+
+.heading {
+  text-align: center;
+  padding-bottom: 2rem;
+  text-shadow: var(--text-shadow);
+  text-transform: uppercase;
+  color: var(--black);
+  font-size: 5rem;
+  letter-spacing: .4rem;
+}
+
+.heading span {
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.doctors .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+
+.doctors .box-container .box {
+  text-align: center;
+  background: #fff;
+  border-radius: .5rem;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+}
+
+.doctors .box-container .box img {
+  height: 20rem;
+  border: var(--border);
+  border-radius: .5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.doctors .box-container .box h3 {
+  color: var(--black);
+  font-size: 2.5rem;
+}
+
+.doctors .box-container .box span {
+  color: var(--green);
+  font-size: 1.5rem;
+}
+
+.doctors .box-container .box .share {
+  padding-top: 2rem;
+}
+
+.doctors .box-container .box .share a {
+  height: 5rem;
+  width: 5rem;
+  line-height: 4.5rem;
+  font-size: 2rem;
+  color: var(--green);
+  border-radius: .5rem;
+  border: var(--border);
+  margin: .3rem;
+}
+
+.doctors .box-container .box .share a:hover {
+  background: var(--green);
+  color: #fff;
+  box-shadow: var(--box-shadow);
+}
+
+
+
+
+/* media queries  */
+@media (max-width:991px) {
+
+  html {
+      font-size: 55%;
   }
-  </script>
-  
-  <style scoped>
-  .container{
-    padding:5%;
+
+  .header {
+      padding: 2rem;
   }
-  
-  #sendcontact{
-    background-color:#3d3b7c;
-    padding-left:10%;
-    padding-right:10%;
-    color:white;
-    transition: 0.8s ease;
+
+  section {
+      padding: 2rem;
   }
-  
-  #sendcontact:hover{
-    background-color:#06a0ac;
-    padding-left:10%;
-    padding-right:10%;
-    color:white;
+
+}
+
+@media (max-width:768px) {
+
+  #menu-btn {
+      display: initial;
   }
-  
-  </style>
+
+  .header .navbar {
+      position: absolute;
+      top: 115%;
+      right: 2rem;
+      border-radius: .5rem;
+      box-shadow: var(--box-shadow);
+      width: 30rem;
+      border: var(--border);
+      background: #fff;
+      transform: scale(0);
+      opacity: 0;
+      transform-origin: top right;
+      transition: none;
+  }
+
+  .header .navbar.active {
+      transform: scale(1);
+      opacity: 1;
+      transition: .2s ease-out;
+  }
+
+  .header .navbar a {
+      font-size: 2rem;
+      display: block;
+      margin: 2.5rem;
+  }
+
+}
+
+@media (max-width:450px) {
+
+  html {
+      font-size: 50%;
+  }
+
+}
+</style>
+
+<script>
+/* eslint-disable */
+import axios from 'axios'
+export default {
+name: 'Products',
+data () {
+  return {
+    productsfields:{},
+    products: {}
+  }
+},created () {
+  axios.get(`http://localhost:3001/products`)
+  .then(response => {
+    this.productsfields = response.data
+  })
+  .catch(e => {
+    this.errors.push(e)
+  })
+},
+methods: {
+  onSubmit (evt) {
+    evt.preventDefault()
+    axios.post(`http://localhost:3001/products`, this.products)
+    .then(function (response) {
+      console.log(response);
+      })
+    
+  }
+}
+}
+</script>
