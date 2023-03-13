@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Services</h1>
+      <h1>Products</h1>
   
       <router-link :to="{name:'create-product'}" class="btn btn-primary">New Product</router-link>
   
@@ -22,8 +22,8 @@
         <td><img :src="`http://localhost:8080/static/pharmacyImages/${product.image}`" alt="Product Image" width="50"></td>
         <td>{{ product.stock }}</td>
         <td>
-          <button class="btn btn-primary" @click="editDoctor(product)">Edit</button>
-          <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
+          <button class="btn btn-primary" @click="editProducts(product)">Edit</button>
+          <button class="btn btn-danger" @click="confirmDelete(product._id)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -36,6 +36,7 @@
   <script>
   
   import axios from 'axios'
+  import swal from 'sweetalert'
   export default {
     name: 'ProductsComp',
     data() {
@@ -48,7 +49,7 @@
     },
     methods: {
       editProducts(product) {
-        this.$router.push({ name: 'edit-doctor', params: { id: product._id } });
+        this.$router.push({ name: 'edit-product', params: { id: product._id } });
       },
         getProducts() {
         axios.get('http://localhost:3001/products/')
@@ -58,17 +59,46 @@
           .catch(error => {
             console.log(error);
           });
-      },/*eslint-disable*/
+      },confirmDelete(id) {
+      swal({
+        title: 'Are you sure you want to delete this file?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+      buttons:{
+        cancel: "Cancel",
+        delete:{
+          text:"Yes,Delete it",
+          value:true,
+        }
+      }
+      }).then((value) => {
+        if (value) {
+          // User clicked the "Yes, delete it!" button
+          // Call your delete file function here
+          this.deleteProduct(id);
+        }
+      });
+    },/*eslint-disable*/
       deleteProduct(id) {
-        if (confirm('Are you sure you want to delete this product?')) {
-          axios.delete(`/products/${id}`)
+         
+          axios.delete(`http://localhost:3001/products/${id}`)
             .then(response => {
               this.getProducts();
+              swal({
+          title: 'Deleted!',
+          text: 'The Product has been deleted.',
+          icon: 'success'
+        });
             })
             .catch(error => {
+              swal({
+          title: 'Error!',
+          text: `${error.message}`,
+          icon: 'warning'
+        });
               console.log(error);
             });
-        }
+        
       }
     }
   }

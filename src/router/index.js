@@ -86,7 +86,7 @@ export default new VueRouter({
         }
 
     }, {
-        path: '/departments/:id/edit',
+        path: 'adminDash/departments/:id/edit',
         name: 'edit-department',
         component: () => import('@/components/AdminCruds/DepartmentsComp/editDepartment.vue'),
         props: true,
@@ -98,6 +98,15 @@ export default new VueRouter({
         path: 'adminDash/doctors/:id/edit',
         name: 'edit-doctor',
         component: () => import('@/components/doctors/EditDoctor.vue'),
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
+    },{
+        path: 'adminDash/products/:id/edit',
+        name: 'edit-product',
+        component: () => import('@/components/AdminCruds/ProductController/editProduct.vue'),
         props: true,
         meta: {
             requiresAuth: true

@@ -40,13 +40,9 @@ router.get('/', async (req, res) => {
 
   
 /* GET SINGLE PRODUCT BY ID */
-router.get('/:id', function(req, res, next) {
-  Products.findById(req.params.id, function (err, post) {
-      if (err) return next(err);
-      res.json(post);
-    });
-  });
-
+router.get('/:id', getProduct, (req, res) => {
+  res.json(res.product);
+});
   /* SAVE PRODUCT 
 router.post('/', function(req, res, next) {
   Products.create(req.body, function (err, post) {
@@ -81,23 +77,25 @@ router.post('/', function(req, res, next) {
   });
 
   /* UPDATE PRODUCT */
-  router.put('/:id', upload.single('photo'), getProduct, async (req, res) => {
+  router.put('/:id', upload.single('image'), getProduct, async (req, res) => {
     if (req.body.name != null) {
       res.product.name = req.body.name;
     }
   
-    if (req.body.specialization != null) {
-      res.product.specialization = req.body.specialization;
+    if (req.body.price != null) {
+      res.product.price = req.body.price;
     }
   
-    if (req.body.experience != null) {
-      res.product.experience = req.body.experience;
+    if (req.body.description != null) {
+      res.product.description = req.body.description;
     }
-  
+  if(req.body.stock !=null){
+    res.product.stock = req.body.stock;
+  }
     if (req.file) {
      
-      if (res.product.photo) {
-        const filePath = `C:/Users/rrahm/OneDrive/Desktop/Betimi/hospital-vue/public/static/pharmacyImages/${res.product.photo}`;
+      if (res.product.image) {
+        const filePath = `C:/Users/rrahm/OneDrive/Desktop/Betimi/hospital-vue/public/static/pharmacyImages/${res.product.image}`;
         fs.unlink(filePath, (err) => {
           if (err) {
             console.error(err);
@@ -106,7 +104,7 @@ router.post('/', function(req, res, next) {
       }
   
   
-      res.product.photo = req.file.filename;
+      res.product.image = req.file.filename;
     }
   
     try {
@@ -131,6 +129,12 @@ router.post('/', function(req, res, next) {
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
+      const filePath = `C:/Users/rrahm/OneDrive/Desktop/Betimi/hospital-vue/public/static/pharmacyImages/${product.image}`;
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error(err);
+          }
+        });
       await product.deleteOne();
       res.json({ message: 'Product deleted successfully' });
     } catch (err) {
